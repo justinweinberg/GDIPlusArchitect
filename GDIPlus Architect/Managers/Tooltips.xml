@@ -1,0 +1,229 @@
+<GDIPlusArchitectTips>
+<toolset name='ToolboxWin'>
+<tip name='btnCircle'>Ellipse tool (O)</tip>
+<tip name='btnPointer'>Pointer tool (V)</tip>
+<tip name='btnHand'>Hand Tool (H)</tip>
+<tip name='btnText'>Text Tool (T)</tip>
+<tip name='btnSquare'>Rectangle Tool (R)</tip>
+<tip name='btnLine'>Line Tool (N)</tip>
+<tip name='btnField'>Field Tool (F)</tip>
+<tip name='btnPen'>Pen Tool (P)</tip>
+<tip name='btnImage'>Import Tool</tip>
+<tip name='btnFill'>Fill Bucket (B)</tip>
+<tip name='btnDropper'>Dropper (I)</tip>
+<tip name='btnMagnify'>Magnifier (M)</tip>
+<tip name='picFillColor'>Specifies the fill of objects</tip>
+<tip name='picStrokeColor'>Specifies the line style (stroke) of objects</tip>
+</toolset>
+<toolset name='PageWin'>
+<tip name='btnName'>Assigns a name to a page in a PrintDocument</tip>
+<tip name='btnDelete'>Deletes the selected page</tip>
+<tip name='btnAddPage'>Adds a new page</tip>
+</toolset>
+<toolset name='FillWin'>
+<tip name='cboFills'>Sets the current fill type</tip>
+<tip name='cboLibrary'>Selects a texture from the texture library</tip>
+<tip name='txtTexture'>Allows you to enter a custom image path for a texture brush</tip>
+<tip name='btnTexture'>Allows you to enter a custom image path for a texture brush</tip>
+<tip name='cboWrapMode'>Specifies how a texture brush repeats</tip>
+<tip name='cboHatchStyle'>Specifies a Drawing2D.HatchStyle for a HatchBrush fill</tip>
+<tip name='picHatchFore'>Double click to set the forecolor of the hatch fill</tip>
+<tip name='picHatchBack'>Double click to set the backcolor of the hatch fill</tip>
+<tip name='picSolid'>Double click to set the the color of the solid fill</tip>
+<tip name='cboGradient'>Specifies the gradient direction of a two color gradient fill</tip>
+<tip name='picGrad1'>Double click to set the first color in a two color gradient fill</tip>
+<tip name='picGrad2'>Double click to set the second color in a two color gradient fill</tip>
+<tip name='txtCustomGradientAngle'>For custom gradients, %specifies the angle in degrees (0 - 360)</tip>
+</toolset>
+<toolset name='InfoWin'>
+<tip name='cboinfomode'>Sets the units to display in the information panel</tip>
+<tip name='lblX'>The X value at the cursor</tip>
+<tip name='lX'>The X value at the cursor</tip>
+<tip name='lblY'>The Y value at the cursor</tip>
+<tip name='lY'>The Y value at the cursor</tip>
+</toolset>
+<toolset name='TextWin'>
+<tip name='cboFontname'>Sets the current font for text and fields</tip>
+<tip name='cboUnits'>Sets unit of measure for fields.  For best print results, use pixel.</tip>
+<tip name='chkBold'>Toggles font bold on and off for the current font</tip>
+<tip name='chkItalic'>Toggles italics on and off for the current font</tip>
+<tip name='chkUnderline'>Toggles underlining on and off for the current font</tip>
+<tip name='chkStrike'>Toggles strike throuh on and off for the current font</tip>
+<tip name='btnDialog'>Opens the standard Windows font dialog.</tip>
+<tip name="nudSize">Specifies the font size in current units</tip>
+</toolset>
+
+<toolset name='ArrangeWin'>
+<tip name='btnAlignLeft'>Aligns to left</tip>
+<tip name='btnAlignMiddle'>Aligns middles</tip>
+<tip name='btnAlignRight'>Align to right</tip>
+<tip name='btnAlignTop'>Align to top</tip>
+<tip name='btnAlignCenter'>Align centers</tip>
+<tip name='btnAlignBottom'>Align to bottom</tip>
+<tip name='btnHorizSpaceEqual'>Distributes widths evenly</tip>
+<tip name="btnVertSpaceEqual">Distributes heights evenly</tip>
+<tip name="btnSameSizeWidth">Same size width</tip>
+<tip name="btnSameSizeHeight">Same size height</tip>
+<tip name="btnSameSizeBoth">Same size both</tip>
+<tip name="pshCanvas">Align to canvas</tip>
+<tip name="pshMargins">Align to margins</tip>
+<tip name="btnBringForward">Bring forward</tip>
+<tip name="btnSendBackward">Send backward</tip>
+<tip name="btnSendToBack">Send to back</tip>
+<tip name="btnBringToFront">Bring to front</tip>
+</toolset>
+
+<toolset name='StrokeWin'>
+<tip name='picColor'>Double click to set the color of the current stroke</tip>
+<tip name='nudWidth'>Specifies the width of the stroke</tip>
+<tip name='cboDash'>Specifies the dash pattern of a stroke</tip>
+<tip name='nudDashOffset'>Specifies the dash offset of a stroke pattern</tip>
+<tip name='cboStartCap'>Specifies the cap (figure) of the start of a stroke.</tip>
+<tip name='cboEndCap'>Specifies the cap (figure) of the end of a stroke.</tip>
+<tip name='cboLineJoin'>Specifies the join style for figures that curve</tip>
+<tip name='cboAlignment'>Specifies where a stroke is drawn in %relation to the points at define it</tip>
+</toolset>
+<toolset name='ColorPicker'>
+<tip name='trkAlpha'>Specifies the alpha value (opacity) of the color as a percentage</tip>
+<tip name='nudHue'>Specifies the hue value in an HSB color definition</tip>
+<tip name='nudSaturation'>Specifies the saturation value in an HSB color definition</tip>
+<tip name='nudBrightness'>Specifies the brightness value in an HSB color definition</tip>
+<tip name='nudRed'>Specifies the red value in an RGB color definition</tip>
+<tip name='nudGreen'>Specifies the blue value in an RGB color definition</tip>
+<tip name='nudAlpha'>Specifies the alpha (opacity) level for the color definition</tip>
+<tip name='pnlSelectedColor'>Previews the final color</tip>
+<tip name='nudBlue'>Specifies the blue value in an RGB color definition</tip>
+<tip name='pnlSelectedColor'>The final color value</tip>
+</toolset>
+<toolset name='ControlProperties'>
+<tip name='txtPixelsX'>Width of the new graphics surface in pixels</tip>
+<tip name='txtPixelsY'>Height of the new graphics surface in pixels</tip>
+<tip name='txtPixelsY'>Height of the new graphics surface in pixels</tip>
+<tip name='picBackColor'>Backcolor of the surface.  %This value is not exported</tip>
+</toolset>
+<toolset name='DocumentProperties'>
+<tip name='txtRootNamespace'>Used as the default namespace for texture brushes and images that will have a runtime source of embedded.</tip>
+<tip name='optVB'>Sets the docment's code language to Visual Basic .NET.</tip>
+<tip name='optVB'>Sets the docment's code language to C#.</tip>
+<tip name='txtClassName'>Sets the generated class name.</tip>
+<tip name='cboTextRenderingHint'>Sets the class wide rendering hint for text.  %Effects the quality and speed of text drawing</tip>
+<tip name='cboSmoothingMode'>Sets the class wide graphics smoothing mode.  %Effects the quality and speed of drawing</tip>
+<tip name='txtMemberVariablePrefix'>Sets an optional member variable prefix %for exported code such as 'm' or '_'. Does not apply to consolidated objects or fields get and set blocks.</tip>
+<tip name='txtFieldPropertyPrefix'>Sets an optional prefix for the generated property wrapper (get/set) block of generated fields.</tip>
+<tip name='chkFills'>Overrides all fill consolidation %(grouping of like brushes) for the document.</tip>
+<tip name='chkStrokes'>Overrides all stroke consolidation %(grouping of like pens) for the document.</tip>
+<tip name='chkStringFormats'>Overrides all string format consolidation %(grouping of like string formats for text and fields) for the document.</tip>
+<tip name='txtPixelsX'>Sets the width of the graphics class document.</tip>
+<tip name='txtPixelsY'>Sets the height of the graphics class document.</tip>
+<tip name='picBackColor'>Sets the backcolor of the graphics class document.  %This property is solely to aid design and is not exported.</tip>
+<tip name='btnViewCode'>Generates all code and displays in a new window.</tip>
+<tip name='btnPageSetup'>Opens a page setup dialog for PrintDocument setup.</tip>
+
+</toolset>
+<toolset name='ExportImage'>
+<tip name='cboZoom'>Sets the current zoom for the export preview.</tip>
+<tip name='cboExp'>Selects the format to export to.</tip>
+<tip name='nudJPEGQuality'>Sets the quality as a percentage for JPEG exports.</tip>
+<tip name='lblFileSize'>Shows the estimated exported file size.</tip>
+</toolset>
+<toolset name='FillProperties'>
+<tip name='cboFills'>Sets the current fill type</tip>
+<tip name='cboLibrary'>Selects a texture from the texture library</tip>
+<tip name='txtTexture'>Allows you to enter a custom image path for a texture brush</tip>
+<tip name='btnTextureFile'>Allows you to enter a custom image path for a texture brush</tip>
+<tip name='cboWrapMode'>Specifies how a texture brush repeats</tip>
+<tip name='cboHatchStyle'>Specifies a Drawing2D.HatchStyle for a HatchBrush fill</tip>
+<tip name='picHatchFore'>Double click to set the forecolor of the hatch fill</tip>
+<tip name='picHatchBack'>Double click to set the backcolor of the hatch fill</tip>
+<tip name='picSolid'>Double click to set the the color of the solid fill</tip>
+<tip name='cboGradient'>Specifies the gradient direction of a two color gradient fill</tip>
+<tip name='picGrad1'>Double click to set the first color in a two color gradient fill</tip>
+<tip name='picGrad2'>Double click to set the second color in a two color gradient fill</tip>
+<tip name='txtCustomGradientAngle'>For custom gradients, specifies %the angle in degrees (0 - 360)</tip>
+</toolset>
+<toolset name='QuickCode'>
+<tip name='btnSave'>Saves the generated window contents to a text file</tip>
+<tip name='btnCopy'>Copies the contents of the text window to the clipboard</tip>
+</toolset>
+ <toolset name='StrokeProperties'>
+<tip name='picSolidBrush'>Double click to set the color of the current stroke</tip>
+<tip name='txtWidth'>Specifies the width of the stroke</tip>
+<tip name='cboDash'>Specifies the dash pattern of a stroke</tip>
+<tip name='cboStartCap'>Specifies the cap (figure) of the start of a stroke.</tip>
+<tip name='cboEndCap'>Specifies the cap (figure) of the end of a stroke.</tip>
+</toolset>
+ 
+<toolset name='Transform'>
+<tip name='cboTransform'>Selects the type of transformation to apply (currently only scale)</tip>
+<tip name='txtWidth'>Specifies the width of the stroke</tip>
+<tip name='txtScaleWidth'>The new width as a percentage</tip>
+<tip name='txtScaleHeight'>The new height as a percentage</tip>
+<tip name='chkScaleProportions'>Enforces fixed scale proportions.</tip>
+</toolset>
+
+<toolset name='Options'>
+<tip name='nudUndoSteps'>Sets the amount of undo steps to record.  Adjust for performance</tip>
+<tip name='chkHighlightObjects'>Toggles whether to highlight handles %as the mouse moves over objects</tip>
+<tip name='chkDrawTextFieldBorders'>Toggles whether to show or %hide borders around field and text.</tip>
+<tip name='chkSampleText'>Toggles whether to draw sample text for fields (Sample text is not actually generated and is for layout purposes only).</tip>
+<tip name='txtSampleText'>Sets the default text for new fields.%  You can also set this for individual fields in the property grid.</tip>
+<tip name='optVB'>Sets the default language for new documents to VB.NET</tip>
+<tip name='optCSharp'>Sets the default language for new documents to C#</tip>
+<tip name='optCSharp'>Sets the default language for new documents to C#</tip>
+<tip name='txtMemberVariablePrefix'>Sets the default member variable prefix for new documents (eg "m", "_").  Does not apply to fields.</tip>
+<tip name='txtFieldPropertyPrefix'>Sets the default field prefix for the property wrapper generated for fields (the get and set block) for new documents.</tip>
+<tip name='txtFieldPropertyPrefix'>Sets the default field prefix for the property wrapper generated for fields (the get and set block) for new documents.</tip>
+<tip name='cboMemberScope'>Sets the default scope of key members for new documents.%Key members are items such as the Rect defining a rectangle, or the text for a text area</tip>
+<tip name='cboFieldScope'>Sets the default scope of the generated property wrappers for fields.</tip>
+<tip name='cboSmoothingMode'>Sets the default smoothing mode for the %graphic output.  Smoothing mode trades off performance and quality.</tip>
+<tip name='cboTextRenderingHint'>Sets the default text rendering hint for generated text.%The text rendering hint trades off performance and quality.</tip>
+<tip name='chkConsolidateFills'>Sets the default consolidation for fills (grouping of like brushes).%You can override this for individual fills you anticipate programming against them via the property grid.</tip>
+<tip name='chkConsolidateStrokes'>Sets the default consolidation for strokes (grouping of like pens). %You can override this for individual strokes you anticipate  programming against them via the property grid.</tip>
+<tip name='chkConsolidateFonts'>Sets the default consolidation for fonts (grouping of like fonts).%You can override this for individual fonts you anticipate programming against them via the property grid.</tip>
+<tip name='chkConsolidateFormats'>Sets the default consolidation for string formats.  You can override this for individual string formats if you anticipate  programming against them via the property grid.</tip>
+<tip name='cboImageRuntime'>Sets the default runtime source for images.%  The runtime source refers to how you intend to include images in your application</tip>
+<tip name='cboTextureRuntime'>Sets the default runtime source for textures (images used with texture brushes).%The runtime source refers to how you intend to include images in your application</tip>
+<tip name='txtImageAbsPath'>Sets the default absolute path for images.% Applicable only when the runtime source is set to an absolute path for the given image.</tip>
+<tip name='txtTextureAbsPath'>Sets the default absolute path for textures (images used with texture brushes).%Applicable only when the runtime source is set to an absolute path for the given texture brush.</tip>
+<tip name='txtImageRelPath'>Sets the default relative path for images.%  This should be a path from your BIN directory, %and in deployment, from your application directory.%Applicable only when the runtime source is set to a relative path for the given image.</tip>
+<tip name='txtTextureRelPath'>Sets the default relative path for textures% (images used with texture brushes).%  This should be a path from your BIN directory, and in deployment, from your application directory.%Applicable only when the runtime source is set to a relative path for the given image.</tip>
+<tip name='btnReset'>Resets options to their defaults.</tip>
+
+<tip name='picGridColor'>Sets the color of the major grid.</tip>
+<tip name='picMinorGridColor'>Sets the color of the minor grid.</tip>
+<tip name='picMarginColor'>Sets the color of margins.</tip>
+<tip name='picGuideColor'>Sets the color of guides.</tip>
+<tip name='picSelhandleColor'>Sets the color of the handles of selected items.</tip>
+<tip name='picMouseOverColor'>Sets the highlight color when mousing over objects on a surface.</tip>
+<tip name='picCurveHandleColor'>Sets the color of points that defines curves in graphics paths.</tip>
+<tip name='picNonPrintAreaColor'>Sets the color of the no print area or the area outside the graphics document.</tip>
+<tip name='picNonPrintAreaColor'>Sets the 'action' color. This is the color of% bounding boxes, drawing hints, etc.</tip>
+
+<tip name='nudSmallNudge'>Sets the small nudge increment in pixels.%Nudging is moving items with the arrow keys.</tip>
+<tip name='nudLargeNudge'>Sets the large nudge increment in pixels.%Large nudging is moving items with the arrow keys while holding CTRL.</tip>
+<tip name='nudLargeNudge'>Sets the large nudge increment in pixels.%Large nudging is moving items with the arrow keys while holding CTRL.</tip>
+<tip name='nudGridElasticity'>Sets the snap to grid elasticity in pixels.%Elasticity refers to how close an edge needs to be before snapping occurs.</tip>
+<tip name='nudGuideElasticity'>Sets the snap to guide elasticity in pixels.%Elasticity refers to how close an edge needs to be before snapping occurs.</tip>
+<tip name='chkSnapMargins'>Toggles whether or not to snap to margins.%  Applicable only for PrintDocuments.</tip>
+<tip name='chkSnapMajorGrid'>Toggles whether or not to snap to the major grid.</tip>
+<tip name='chkSnapMinorGrid'>Toggles whether or not to snap to the minor grid.</tip>
+<tip name='nudGridSize'>Sets the major grid unit increment in pixels.</tip>
+<tip name='nudMinorGridSize'>Sets the minor grid unit increment in pixels.</tip>
+
+
+<tip name='chkGuides'>Toggles whether or not to show guides.</tip>
+<tip name='chkMargins'>Toggles whether or not to show margins.%  Applicable only for PrintDocuments.</tip>
+<tip name='chkMajorGrid'>Toggles whether or not to show the major grid.</tip>
+<tip name='chkMinorGrid'>Toggles whether or not to show the minor grid.</tip>
+
+<tip name='optEnhancedMenus'>Sets the menu style to IDE</tip>
+<tip name='optPlainMenus'>Sets the menu style to Plain</tip>
+<tip name='chkMenuIcons'>Toggles whether to show icons on menus or not</tip>
+<tip name='chkToolTips'>Toggles whether to show tooltips or not</tip>
+<tip name='optCustom'>Sets the application wide color picker style to the custom color picker</tip>
+<tip name='optWindows'>Sets the application wide color picker style to the Windows color picker</tip>
+<tip name='chkTrace'>Enables debug tracing to help troubleshoot support issues.%  Leave this off for performance reasons unless debugging</tip>
+
+
+</toolset>
+</GDIPlusArchitectTips>

@@ -1,0 +1,2333 @@
+<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>GDIPlusArchitect</name>
+    <version>1.2.2.1</version>
+    <fullname>GDIPlusArchitect, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null</fullname>
+  </assembly>
+  <members>
+    <member name="T:GDIPlusArchitect.App">
+      <summary>
+ Holds references and brokers application wide objects.  Every object in the 
+ Globals class is a single instanced object and is only created here.  There is a 
+ simliar object in the GDIObjects Project which holds single instanced objects relevant 
+ to the GDIObject scope as well as the User Interface scope. 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.App.Main(System.String[])">
+      <summary>
+ Main entry point for the application. 
+ </summary>
+ <param name="CmdArgs" />
+ <returns /></member>
+    <member name="P:GDIPlusArchitect.App.MDIMain">
+      <summary>
+ Hold the application wide main MDI form in which all of the panels, 
+ the GDIMenu, and all child forms exists in.  There is only one instance of this 
+ object in the entire application. 
+ </summary>
+ <value>Returns a reference to the MDIMain form</value></member>
+    <member name="P:GDIPlusArchitect.App.PanelManager">
+      <summary>
+ Hold the application wide PanelManager.  The PanelManager is responsible for 
+ creating the panel instances, brokering events and providing methods to interact 
+  with panels.  No panel is exposed in scope beyond the panel manager. 
+ </summary>
+ <value>Returns a reference to the MDIMain form</value></member>
+    <member name="P:GDIPlusArchitect.App.Options">
+      <summary>
+ Returns a reference to application wide Options.  The options class holds all 
+ of the user defined options in the application, notifies the GDIObjects related 
+ classes of changes to options, and is responsible for serializing itself to 
+ Isolated Storage. 
+ </summary>
+ <value /></member>
+    <member name="P:GDIPlusArchitect.App.ToolTipManager">
+      <summary>
+ Gets the application wide tool tip manager.  All tool tip interaction in the 
+ application uses this object to assign its tips.   The actual tips themselves are 
+ contained within an external XML file.  Every tool tip in the application depends on 
+ this object to function. 
+ </summary>
+ <value>Returns a reference to the tool tip manager</value></member>
+    <member name="P:GDIPlusArchitect.App.HelpManager">
+      <summary>
+ Gets the application wide help manager.  The help manager is responsible for 
+ brokering all help interactions in the application. 
+ </summary>
+ <value /></member>
+    <member name="P:GDIPlusArchitect.App.IconManager">
+      <summary>
+ Gets the application wide IconManager.  The icon manager is responsible for 
+ managing all of the icons used in the application.  This manager holds an imagelist 
+ which each item that needs an icon (or bitmap) references.  It also is responsible 
+ for providing methods to assign icons and bitmaps to objects that request them. 
+ </summary>
+ <value /></member>
+    <member name="P:GDIPlusArchitect.App.ToolManager">
+      <summary>
+ This manager is the most complex. It is responsible for holding the current tool 
+ state and wrapping all tool interactions.  For example, when the user clicks the 
+ rectangle drawing tool, the toolmanager is notified of a new state.  When the user 
+ then clicks on the surface, the manager is responsible for handling the drawing of 
+ the tool to the surface and responding to an end tool requests from the surface. 
+ </summary>
+ <value>Returns a reference to the tool manager</value></member>
+    <member name="P:GDIPlusArchitect.App.TraceOn">
+      <summary>
+ Whether tracing us current enabled or not. 
+ </summary>
+ <value /></member>
+    <member name="T:GDIPlusArchitect.EnumTools">
+      <summary>
+ The tools that GDI+ Architect supports. 
+ </summary>
+    </member>
+    <member name="T:GDIPlusArchitect.MRGNud">
+      <summary>
+ Custom Updown used througought the application.  There were a couple things 
+ about the default NUD that created issues that needed to be addressed in order 
+ to get the functionality I wanted.  This control addresses those issues. 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.MRGNud.#ctor">
+      <summary>
+ Creates a new instance of an MRGNud control 
+ </summary>
+    </member>
+    <member name="P:GDIPlusArchitect.MRGNud.Text">
+      <summary>
+ Gets or sets the text inside of the NUD 
+ </summary>
+ <value /></member>
+    <member name="P:GDIPlusArchitect.MRGNud.MinValue">
+      <summary>
+ Gets or sets the minimum valid value of the nud 
+ </summary>
+ <value>A decimal that is the lower bound on values in the NUD</value></member>
+    <member name="P:GDIPlusArchitect.MRGNud.DecimalPlaces">
+      <summary>
+ Gets or sets the number of acceptable decimal places 
+ </summary>
+ <value>An int32 holding the maximum decimal precision of the NUD</value></member>
+    <member name="P:GDIPlusArchitect.MRGNud.AllowBlank">
+      <summary>
+ Gets or sets a value indicating whether a blank value is acceptable 
+ </summary>
+ <value>Boolean indicating whether the NUD should allow blanks or not.</value></member>
+    <member name="P:GDIPlusArchitect.MRGNud.MaxValue">
+      <summary>
+ Gets or sets the maximum acceptable value in the NUD 
+ </summary>
+ <value>Decimal representing the upper bound on values in the NUD</value></member>
+    <member name="M:GDIPlusArchitect.MRGNud.txtNud_LostFocus(System.Object,System.EventArgs)">
+      <summary>
+ Handles loosing focus on the textbox to make sure a valid value is contained 
+ within the controls. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.MRGNud.OnMouseWheel(System.Windows.Forms.MouseEventArgs)">
+      <summary>
+ Overrides default wheel behavior to increment the NUD values. 
+ </summary>
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.MRGNud.txtNud_Click(System.Object,System.EventArgs)">
+      <summary>
+ Handles clicks on the text box, selecting the entire text of the nud the first 
+ time the click is registered. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.MRGNud.txtNud_TextChanged(System.Object,System.EventArgs)">
+      <summary>
+ Handles changes in the text box entry, calling handleChange to ensure that 
+ only valid values are entered. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.MRGNud.assignText(System.String)">
+      <summary>
+ Performs the actual value assignment to the control based upon settings in the 
+ nud.  A couple rules are checked here and enforced as the value is assigned and 
+ then the last good value is saved in _lastKnownValue. 
+ </summary>
+ <param name="s" /></member>
+    <member name="M:GDIPlusArchitect.MRGNud.ProposedValueValid(System.String)">
+      <summary>
+ Checks a proposed value to make sure it conforms to the settings on the NUD. 
+ Returns a boolean indicating if the value is acceptable or not. 
+ </summary>
+ <param name="s">The proposed value as a string</param>
+ <returns>A boolean indicating if the proposed value is valid or not.</returns></member>
+    <member name="M:GDIPlusArchitect.MRGNud.handleChange(System.String)">
+      <summary>
+ Responds to changes in the nud control's values and either sets the value to 
+ the new value, or if invalid, sets the value to the last good value. 
+ </summary>
+ <param name="sProposedValue" /></member>
+    <member name="M:GDIPlusArchitect.MRGNud.increment(System.Boolean)">
+      <summary>
+ Handles an increment request from one of the NUD buttons. 
+ </summary>
+ <param name="bPositive">Whether the NUD should implement up or down.</param></member>
+    <member name="T:GDIPlusArchitect.RollButton">
+      <summary>
+ A roll button is very similar to a toolbutton, but does not participate as a group. 
+ The goal of the roll button is to provide a roll over popup look.  A roll button 
+ is assumed ot not have a textual component. 
+ 
+ The button also has a little more control over the click event, raising its own 
+ custom click event called ButtonClick.  This event is only raised 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.RollButton.#ctor">
+      <summary>
+ Creates a new instance of a RollButton.  Sets the style properties to double 
+ buffer and usermouse.  Double buffer is probably overkill here,  but I wanted 
+ an assured smooth roll over without flicker. 
+ </summary>
+    </member>
+    <member name="P:GDIPlusArchitect.RollButton.ImageList">
+      <summary>
+ Gets or sets the image list that has the image that is painted on the button 
+ </summary>
+ <value /></member>
+    <member name="P:GDIPlusArchitect.RollButton.ImageIndex">
+      <summary>
+ Gets or sets the image index from which the button should retrieve its 
+ image in the image list. 
+ </summary>
+ <value /></member>
+    <member name="M:GDIPlusArchitect.RollButton.OnMouseUp(System.Windows.Forms.MouseEventArgs)">
+      <summary>
+ Overrides mouse up on the control in order to raise the custom buttonclick 
+ event given that the click was within bounds. 
+ </summary>
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.RollButton.OnMouseDown(System.Windows.Forms.MouseEventArgs)">
+      <summary>
+ Overrides mouse down, recording that the mouse is down for when painting 
+ </summary>
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.RollButton.OnMouseEnter(System.EventArgs)">
+      <summary>
+ Initiates the roll over effect by setting the mouse over property. 
+ </summary>
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.RollButton.OnMouseLeave(System.EventArgs)">
+      <summary>
+ Ends the roll over effect by settings the mouse over property to false 
+ </summary>
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.RollButton.OnPaint(System.Windows.Forms.PaintEventArgs)">
+      <summary>
+ Renders the roll button depending on its current state.  First is checks 
+ whether the button is enabled or not, if it's not enabled, paints disabled. 
+ If it is enabled, it checks if the mouse is down on the button or not.  If 
+ it is, it draws the down.  If not, it checks if the mouse is over the button. 
+ If it is, renders the up look.  Otherwise if none of the following happened, 
+ it renders it normally. 
+ </summary>
+ <param name="e" /></member>
+    <member name="T:GDIPlusArchitect.ScrollButton">
+      <summary>
+ The scrollbutton is used exclusively on the tool box to get as close a look and 
+ feel as possible to the .NET environment's scroll buttons.  The concept is that 
+ on the first mouse down, the control should register a single scroll. 
+ If the mouse held down, the button should raise scroll events at a normal 
+ increment. 
+ </summary>
+    </member>
+    <member name="E:GDIPlusArchitect.ScrollButton.Scroll" />
+    <member name="T:GDIPlusArchitect.ScrollButton.ScrollEventHandler">
+      <summary>
+ The custom scroll event raised when the button is initially clicked and when 
+ it's being held down. 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.ScrollButton.#ctor">
+      <summary>
+ Creates a new instance of a scroll button.  Sets the default style to double 
+ buffering. 
+ </summary>
+    </member>
+    <member name="P:GDIPlusArchitect.ScrollButton.ImageList">
+      <summary>
+ Gets or sets the image list that renders the scroll button to the surface. 
+ </summary>
+ <value>An image list used that contains the image needed to paint the button</value></member>
+    <member name="P:GDIPlusArchitect.ScrollButton.ImageIndex">
+      <summary>
+ Gets or sets the index within the image list used to paint the button 
+ </summary>
+ <value /></member>
+    <member name="M:GDIPlusArchitect.ScrollButton.OnMouseDown(System.Windows.Forms.MouseEventArgs)">
+      <summary>
+ Overrides mouse down to start the timer, reset ticks, and set  to true. 
+ </summary>
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.ScrollButton.OnMouseUp(System.Windows.Forms.MouseEventArgs)">
+      <summary>
+ Overrides mouse up to stop the timer. and set  to false. 
+ </summary>
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.ScrollButton.tmrScroll_Tick(System.Object,System.EventArgs)">
+      <summary>
+ Handles ticks from the timer and raises the scroll event repeatedly if the 
+ tick count is over 20 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.ScrollButton.OnMouseLeave(System.EventArgs)">
+      <summary>
+ Stops the timer on mouse leave and sets mouse down to false 
+ </summary>
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.ScrollButton.OnPaint(System.Windows.Forms.PaintEventArgs)">
+      <summary>
+ Renders the scroll button.  The scroll button has a different appearance 
+ if it is disabled or if the mouse is down. 
+ </summary>
+ <param name="e" /></member>
+    <member name="T:GDIPlusArchitect.ToolButton">
+      <summary>
+ Provides a simple button for use on the toolbar panel. 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.ToolButton.#ctor">
+      <summary>
+ Creates a new instance of a Toolbutton 
+ </summary>
+    </member>
+    <member name="P:GDIPlusArchitect.ToolButton.Selected">
+      <summary>
+ Gets or sets a value indicating if this button is selected. 
+ </summary>
+ <value>Whether the button is selected or not</value></member>
+    <member name="P:GDIPlusArchitect.ToolButton.Caption">
+      <summary>
+ Gets or sets the tool button's caption property 
+ </summary>
+ <value>String to display on the button</value></member>
+    <member name="P:GDIPlusArchitect.ToolButton.ImageList">
+      <summary>
+ Gets or sets the tool button's image list 
+ </summary>
+ <value /></member>
+    <member name="P:GDIPlusArchitect.ToolButton.ImageIndex">
+      <summary>
+ Gets or sets the image index of the button in the imagelist 
+ </summary>
+ <value>Int32 representing the image index of the button</value></member>
+    <member name="M:GDIPlusArchitect.ToolButton.OnMouseUp(System.Windows.Forms.MouseEventArgs)">
+      <summary>
+ Reacts to a mouse up on the tool button.  Raises the custom ToolButtonClick 
+ if the mouse was released within the bounds of the button and makes it the 
+ selected button. 
+ </summary>
+ <param name="e" />
+             '''</member>
+    <member name="M:GDIPlusArchitect.ToolButton.OnMouseDown(System.Windows.Forms.MouseEventArgs)">
+      <summary>
+ Reacts to a mouse down on the tool buttoin 
+ </summary>
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.ToolButton.OnMouseEnter(System.EventArgs)">
+      <summary>
+ Handles mouse over 
+ </summary>
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.ToolButton.OnMouseLeave(System.EventArgs)">
+      <summary>
+ Handles mouse leave 
+ </summary>
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.ToolButton.OnPaint(System.Windows.Forms.PaintEventArgs)">
+      <summary>
+ Renders the tool button when OnPaint is initiated. 
+ </summary>
+ <param name="e">Paint event args from which a graphics context is retrieved.</param>
+ <remarks>Notice how much we get for "Free" using the ControlPaint class here. 
+ </remarks></member>
+    <member name="M:GDIPlusArchitect.ToolButton.ToggleSelection(GDIPlusArchitect.ToolButton)">
+      <summary>
+ User to help the tool buttons act as a group of buttons.  Each button is asked 
+ to check if it is selected and update its selection property and UI as necessary. 
+ </summary>
+ <param name="s" /></member>
+    <member name="T:GDIPlusArchitect.ColorChangedEventArgs">
+      <summary>
+ Provides color changed event argument 
+ </summary>
+ <remarks>Credit to Ken Getz for this code! 
+ </remarks></member>
+    <member name="M:GDIPlusArchitect.ColorChangedEventArgs.#ctor(GDIPlusArchitect.ColorHandler.RGB,GDIPlusArchitect.ColorHandler.HSV)">
+      <summary>
+ Creates a new instance of the ColorChangedEventArgs 
+ </summary>
+ <param name="RGB">RGB value of the color</param>
+ <param name="HSV">HSV value of the color</param></member>
+    <member name="P:GDIPlusArchitect.ColorChangedEventArgs.RGB">
+      <summary>
+ Gets the RGB value of the color 
+ </summary>
+ <value /></member>
+    <member name="P:GDIPlusArchitect.ColorChangedEventArgs.HSV">
+      <summary>
+ Gets the HSV value of the color 
+ </summary>
+ <value /></member>
+    <member name="T:GDIPlusArchitect.ColorHandler">
+      <summary>
+ Handles conversions between RGB and HSV. 
+ </summary>
+ <remarks>Credit to Ken Getz for this code! 
+ </remarks></member>
+    <member name="T:GDIPlusArchitect.ColorHandler.RGB">
+      <summary>
+ Container for RGB color information (Red, Green, Blue) 
+ </summary>
+    </member>
+    <member name="T:GDIPlusArchitect.ColorHandler.HSV">
+      <summary>
+ Container for HSV color information (Hue, Saturation, Value) 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.ColorHandler.HSVtoColor(GDIPlusArchitect.ColorHandler.HSV)">
+      <summary>
+ Returns a Color value for an HSV structure 
+ </summary>
+ <param name="HSV">HSV structure to make a color</param>
+ <returns /></member>
+    <member name="M:GDIPlusArchitect.ColorHandler.HSVtoColor(System.Int32,System.Int32,System.Int32)">
+      <summary>
+ Returns an Color from an HSV value list 
+ </summary>
+ <param name="H">Hue amount</param>
+ <param name="S">Saturation amount</param>
+ <param name="V">Value amount</param>
+ <returns /></member>
+    <member name="M:GDIPlusArchitect.ColorHandler.HSVtoRGB(GDIPlusArchitect.ColorHandler.HSV)">
+      <summary>
+ Converrs an HSV structure to an RGB 
+ </summary>
+ <param name="HSV">An HSV structure</param>
+ <returns>An RGB structure</returns></member>
+    <member name="M:GDIPlusArchitect.ColorHandler.RGBtoHSV(GDIPlusArchitect.ColorHandler.RGB)">
+      <summary>
+ Converts an RGB value to an HSV 
+ </summary>
+ <param name="RGB">The RGB structure to convert</param>
+ <returns>An HSV structure</returns></member>
+    <member name="T:GDIPlusArchitect.ColorWheel">
+      <summary>
+ Implements a color wheel chooser for custom color picking. 
+ </summary>
+ <remarks>Credit to Ken Getz for this code! 
+ </remarks></member>
+    <member name="M:GDIPlusArchitect.ColorWheel.DrawBrightnessRect(System.Drawing.Graphics,System.Drawing.Color)">
+      <summary>
+ Renders the brightness selecter portion of the color picker 
+ </summary>
+ <param name="g">Graphics context to draw against</param>
+ <param name="TopColor" /></member>
+    <member name="M:GDIPlusArchitect.ColorWheel.CreateWheelBitmap">
+      <summary>
+ 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.ColorWheel.GetPoints(System.Double,System.Drawing.Point)">
+      <summary>
+ 
+ </summary>
+ <param name="radius" />
+ <param name="centerPoint" />
+ <returns /></member>
+    <member name="M:GDIPlusArchitect.ColorWheel.PolarToRect(System.Double,System.Double,System.Drawing.Point)">
+      <summary>
+ Converts a coordinate in polar space to rectangular space 
+ </summary>
+ <param name="degrees" />
+ <param name="radius" />
+ <param name="centerPoint" />
+ <returns /></member>
+    <member name="M:GDIPlusArchitect.ColorWheel.DrawColorPointer(System.Drawing.Graphics,System.Drawing.Point)">
+      <summary>
+ Draws the selected color square on the color wheel 
+ </summary>
+ <param name="g">Graphics context to draw against </param>
+ <param name="pt">Top left point of the rectangle</param></member>
+    <member name="M:GDIPlusArchitect.ColorWheel.DrawBrightnessPointer(System.Drawing.Graphics,System.Drawing.Point)">
+      <summary>
+ Draws the triangular brightness pointer 
+ </summary>
+ <param name="g">graphics context to draw against</param>
+ <param name="pt">Top left point of the triangle</param></member>
+    <member name="P:GDIPlusArchitect.ColorWheel.Alpha">
+      <summary>
+ Gets or sets the alpha value of the color 
+ </summary>
+ <value>Ain int32 between 0 and 255 representing the alpha value</value></member>
+    <member name="P:GDIPlusArchitect.ColorWheel.Color">
+      <summary>
+ Returns the selected color 
+ </summary>
+ <value>The selected color</value></member>
+    <member name="T:GDIPlusArchitect.dgColorPicker">
+      <summary>
+ Implements a custom color picker dialogue 
+ </summary>
+ <remarks>Credit to Ken Getz for this code! 
+ </remarks></member>
+    <member name="T:GDIPlusArchitect.dgDocProperties">
+      <summary>
+ Provides an interface for changing properties on GDIDocuments as well as 
+ gathering statistics on the document.  Most of the options here have to do with code export. 
+ </summary>
+    </member>
+    <member name="T:GDIPlusArchitect.dgDocProperties.ColumnSort">
+      <summary>
+ Implements a sortable column for a list view.  The sortable list view columns 
+ are used when the list of image exports are rendered 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.dgDocProperties.ColumnSort.#ctor(System.Int32)">
+      <summary>
+ Creates a new instance of a sortable column given a column number 
+ </summary>
+ <param name="columnSorted" /></member>
+    <member name="M:GDIPlusArchitect.dgDocProperties.ColumnSort.Compare(System.Object,System.Object)">
+      <summary>
+ Compares two distinct items in a list view.  Implements IComparable to indicate 
+ which list view item should be before another list view item. 
+ </summary>
+ <param name="a" />
+ <param name="b" />
+ <returns />
+ <remarks>All comparisons in this version of a ColumnSort are string based.  The 
+ example can be expanded upon to do custom sorting based on data types. 
+ </remarks></member>
+    <member name="M:GDIPlusArchitect.dgDocProperties.lvImageDetails_ColumnClick(System.Object,System.Windows.Forms.ColumnClickEventArgs)">
+      <summary>
+ Responds to a column click, initiating sorting 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.dgDocProperties.#ctor(System.Drawing.Printing.PageSettings)">
+      <summary>
+ Creates a new instance of the document properties object given a document and 
+ the MDIMain's current user indicated page settings. 
+ page se 
+ </summary>
+ <param name="pgsettings">Current page settings from MDIMain.</param></member>
+    <member name="M:GDIPlusArchitect.dgDocProperties.addImageSummary(GDIObject,GDITexturedFill)">
+      <summary>
+ Append an image summary to the image list for a textured object 
+ </summary>
+ <param name="obj">Object textures</param>
+ <param name="fill">The GDITexturedFill used to paint the object</param></member>
+    <member name="M:GDIPlusArchitect.dgDocProperties.addImageSummary(GDILinkedImage)">
+      <summary>
+ Adds an image to the list of summarized images 
+ </summary>
+ <param name="gdiimg">The GDILinkedImage object to append to the list</param></member>
+    <member name="M:GDIPlusArchitect.dgDocProperties.addToFillTotal(GDIObject,GDIFill)">
+      <summary>
+ Calculates the number of times various fills have been used.  Also adds an 
+ image summary for textured fills 
+ </summary>
+ <param name="obj">Object filled by the fill</param>
+ <param name="fill">The GDIFill used to fill the object</param></member>
+    <member name="M:GDIPlusArchitect.dgDocProperties.loadStatistics">
+      <summary>
+ Initiates the process of gathering statistics from a GDIDocument.  This method 
+ adds up the number of times objects have been used on a particular document and 
+ summarized the images used in a document. 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.dgDocProperties.applyChanges">
+      <summary>
+ Applies changes based on the dgDocProperties value to the current GDIDocument. 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.dgDocProperties.btnPageSetup_Click(System.Object,System.EventArgs)">
+      <summary>
+ Initiates page setup for PrintDocument type of exports. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.dgDocProperties.btnViewCode_Click(System.Object,System.EventArgs)">
+      <summary>
+ Initiates a code view for the document in the currenty selected language 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member>
+    <member name="T:GDIPlusArchitect.dgExportImage">
+      <summary>
+ Initiates an image export dialogue for the current drawn page. 
+ </summary>
+ <remarks>Credit to Michael gold for his scrollable picture box example! 
+ </remarks></member>
+    <member name="M:GDIPlusArchitect.dgExportImage.#ctor">
+      <summary>
+ Creates a new instance of the Export Image dialogue.  Populate the dialogue with 
+ zoom information and fills the format drop down. 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.dgExportImage.btnOk_Click(System.Object,System.EventArgs)">
+      <summary>
+ Initiates image export.  This method asks the _SelectedExport to export itself 
+ to the path returned by a save dialogue. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.dgExportImage.cboExp_SelectedValueChanged(System.Object,System.EventArgs)">
+      <summary>
+ Handles changes in the export options type drop down. 
+ </summary>
+ <param name="sender" />
+ <param name="e" />
+ <remarks>Notice that if the export is JPEG, we bring a special quality panel 
+ to the the front.  Otherwise we hide it. 
+ </remarks></member>
+    <member name="M:GDIPlusArchitect.dgExportImage.picPreview_Paint(System.Object,System.Windows.Forms.PaintEventArgs)">
+      <summary>
+ Renders the image to the picture box for the current offset and zoom. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.dgExportImage.updatePreview">
+      <summary>
+ Updates the image preview in the picture box.  Creates a new temporary image and 
+ places it inside the box. 
+ </summary>
+ <remarks>Notice the use of temporary files here.  First, if you have never seen the 
+ very nice method Path.GetTempFileName, it's useful for doing exactly what we're doing 
+ here which is creating a temp file.  In order to get the export image size, we actually 
+ do the export and check the size of the exported file. 
+ 
+ This method also short circuits if the export format drop down is in the process of 
+ being changed 
+ </remarks></member>
+    <member name="M:GDIPlusArchitect.dgExportImage.populateFormats">
+      <summary>
+ Populates the list of drop down boxes 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.dgExportImage.populateZoom">
+      <summary>
+ Populates the zoom drop down with appropriate values.  Sets the zoom to 100% 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.dgExportImage.sizeBars">
+      <summary>
+ Calculates the sizes of the up and down veritcal image scroll bars based upon 
+ the image being displayed and the size of the picPreview box. 
+ </summary>
+    </member>
+    <member name="T:GDIPlusArchitect.dgFillPicker">
+      <summary>
+ Dialogue for when the user double clicks on the fill box (as opposed to uses the 
+ fill panel. 
+ </summary>
+ <remarks>The first thing the dialogue has to establish is what the current fill is. 
+ It then has the job of letting the user select from various types of fills and setting 
+ properties on them. 
+ </remarks></member>
+    <member name="M:GDIPlusArchitect.dgFillPicker.#ctor">
+      <summary>
+ Creates a new instance of the fill properties dialogue.  Populate the dialogue 
+ with the current fill. 
+ </summary>
+    </member>
+    <member name="P:GDIPlusArchitect.dgFillPicker.SelectedFill">
+      <summary>
+ Returns the selected fill.  Used for getting the out fill when this dialogue 
+ closes. 
+ </summary>
+ <returns>The final populated selected fill</returns></member>
+    <member name="M:GDIPlusArchitect.dgFillPicker.populateFills(GDIFill)">
+      <summary>
+ Populates the drop down list of fills. 
+ </summary>
+ <param name="curFill">The current session wide assigned fill</param></member>
+    <member name="M:GDIPlusArchitect.dgFillPicker.showSolid">
+      <summary>
+ Shows the solid fill options panel 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.dgFillPicker.showHatch">
+      <summary>
+ Shows the hatch fill options panel 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.dgFillPicker.showTexture">
+      <summary>
+ Shows the texture fill options panel 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.dgFillPicker.showGradient">
+      <summary>
+ Shows the gradient fill options panel 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.dgFillPicker.onFillChanged">
+      <summary>
+ Handles changes in the fill drop  down 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.dgFillPicker.cboFills_SelectedValueChanged(System.Object,System.EventArgs)">
+      <summary>
+ Handles changes to the fill type drop down 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.dgFillPicker.picPreview_Paint(System.Object,System.Windows.Forms.PaintEventArgs)">
+      <summary>
+ Renders a preview of the current fill to a picture box. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.dgFillPicker.picGrad1_Click(System.Object,System.EventArgs)">
+      <summary>
+ Handles clicks on the first color gradient fill dialogue box 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.dgFillPicker.picGrad2_Click(System.Object,System.EventArgs)">
+      <summary>
+ Handles a click on the second gradient fill color box. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.dgFillPicker.picHatchBack_Click(System.Object,System.EventArgs)">
+      <summary>
+ Handles a click on the hatch back color box 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.dgFillPicker.picHatchFore_Click(System.Object,System.EventArgs)">
+      <summary>
+ Handles clicks on the fore color dialogue box 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.dgFillPicker.cboHatchStyle_SelectedValueChanged(System.Object,System.EventArgs)">
+      <summary>
+ handles clicks on the hatch style drop down 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.dgFillPicker.btnTexture_Click(System.Object,System.EventArgs)">
+      <summary>
+ Handles texture selection 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.dgFillPicker.cboGradient_SelectedValueChanged(System.Object,System.EventArgs)">
+      <summary>
+ Handles changes in the gradient drop down 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.dgFillPicker.picSolid_Click(System.Object,System.EventArgs)">
+      <summary>
+ Handles clicks on the solid color box 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.dgFillPicker.cboLibrary_SelectedValueChanged(System.Object,System.EventArgs)">
+      <summary>
+ Responds to changes in the selected texture from the texture libary drop down 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.dgFillPicker.nudAngle_ValueChanged(System.Object,System.EventArgs)">
+      <summary>
+ Handles changes on the custom gradient angle nud 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member>
+    <member name="T:GDIPlusArchitect.dgNewGraphicClass">
+      <summary>
+ Provides a dialogue for creating a new instance of a graphics class.  This dialogue 
+ is used to get the user defined width and height and set the classes back color. 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.dgNewGraphicClass.#ctor">
+      <summary>
+ Creates a new instance of a graphics class object 
+ </summary>
+    </member>
+    <member name="P:GDIPlusArchitect.dgNewGraphicClass.ControlSize">
+      <summary>
+ Gets the size specified by the user for the new graphics class 
+ </summary>
+ <value /></member>
+    <member name="P:GDIPlusArchitect.dgNewGraphicClass.SelectedBackColor">
+      <summary>
+ Gets the back color specified by the user for the new graphics class 
+ </summary>
+ <value /></member>
+    <member name="T:GDIPlusArchitect.dgOptions">
+      <summary>
+ Provides a wrapper for setting application wide options and settings 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.dgOptions.#ctor">
+      <summary>
+ Creates a new instance of the Options dialogue.  Populates the dialogue with 
+ the current application wide options. 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.dgOptions.btnReset_Click(System.Object,System.EventArgs)">
+      <summary>
+ Causes options to reset to their shipped with state. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.dgOptions.popColor(System.Object,System.EventArgs)">
+      <summary>
+ Handles the various color box press events.  This initiates color selection 
+ for application wide colors such as the color of grids and drag handles. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member>
+    <member name="M:GDIPlusArchitect.dgOptions.loadoptions">
+      <summary>
+ Retrieves the current application wide options 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.dgOptions.applyOptions">
+      <summary>
+ Applies the options as currently selected to the application wide Options object. 
+ </summary>
+    </member>
+    <member name="T:GDIPlusArchitect.dgQuickCode">
+      <summary>
+ Provides a window for displaying quick code (Generated code that is not to be 
+ exported) 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.dgQuickCode.#ctor(System.String)">
+      <summary>
+ Creates a new instance of the quick code dialogue given the code to display. 
+ </summary>
+ <param name="sCode">The code to display</param></member>
+    <member name="T:GDIPlusArchitect.dgStrokePicker">
+      <summary>
+ Provides an interface to set stroke properties in response to a double click 
+ on the stroke color area of the toolbox. 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.dgStrokePicker.GO">
+      <summary>
+ Intiates stroke selection 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.dgStrokePicker.populate">
+      <summary>
+ Populates the stroke dialogue with current settings from the application wide 
+ stroke. 
+ </summary>
+    </member>
+    <member name="T:GDIPlusArchitect.dgTransform">
+      <summary>
+ Provides a dialogue for transforming the size of objects 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.dgTransform.#ctor">
+      <summary>
+ Creates a new instance of the Tranform Dialogue 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.dgTransform.applytransform">
+      <summary>
+ Applies the current transformation objects to the set of selected objects 
+ </summary>
+    </member>
+    <member name="T:GDIPlusArchitect.GDIDOC">
+      <summary>
+ This is the actual GDI+ document window.  When the user opens or closes a document, 
+ this is what is recreated.  The drawing related functionality is contained in this 
+ forms surface field.  The GDIDocument instance is contained in this 
+ forms document field 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.GDIDOC.#ctor(GDIDocument)">
+      <summary>
+ Creates a new instance of a GDIDoc window. 
+ </summary>
+ <param name="doc">The GDIDocument that this window is managing.</param>
+ <remarks>When the local document property is set in the constructor, a series of 
+ delegates are attached.  Make sure to look at the Document property to understand 
+ what is happening. 
+ </remarks></member>
+    <member name="M:GDIPlusArchitect.GDIDOC.saveAs(System.String)">
+      <summary>
+ Begins a saveAs process, returning a boolean indicating if the user actually did 
+ save the document.  The user may cancel the save as dialogue in which case this 
+ method returns false 
+ </summary>
+ <param name="sName">The initial name of the document to use in a save as operation</param>
+ <returns>A boolean indicating if the document was actually saved.</returns></member>
+    <member name="M:GDIPlusArchitect.GDIDOC.saveDocument">
+      <summary>
+ Asks the document to save itself.  Returns a boolean indicating if the user has 
+ successfully saved the document. 
+ </summary>
+ <returns>A boolean indicating if the document has been saved</returns>
+ <remarks>This method can return false if the document has never been saved and 
+ requires a name, and the user cancels the "saveas" process. 
+ </remarks></member>
+    <member name="M:GDIPlusArchitect.GDIDOC.GDIDOC_Closing(System.Object,System.ComponentModel.CancelEventArgs)">
+      <summary>
+ Interrupts the standard form close to check if the document needs to be saved and 
+ prompts the user as necessary. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member>
+    <member name="P:GDIPlusArchitect.GDIDOC.Document">
+      <summary>
+ Gets or Sets the document this GDIDoc window is displaying. 
+ </summary>
+ <value>A GDIDocument instance to display within the GDIDoc window</value>
+ <remarks>Notice that callbacks are removed prior to setting this method 
+ if the window previously contained a document, and then are reassigned 
+ for the new document.  Finally, notice that this method raises the OnPageChanged 
+ event since with a new document, the page that was being displayed has changed 
+ </remarks></member>
+    <member name="M:GDIPlusArchitect.GDIDOC.refreshHeader">
+      <summary>
+ Updates the text displayed at the top of the window to display the document 
+ name and the current zoom as a percentage 
+ </summary>
+    </member>
+    <member name="M:GDIPlusArchitect.GDIDOC.Dispose(System.Boolean)">
+      <summary>
+ Disposes of the GDIDocument window.  Notice that this method removes the window 
+ from delegates it was subscribing to (it would be a bad thing to call these on 
+ a disposed window) 
+ </summary>
+ <member name="T:GDIPlusArchitect.GDISurface"><summary>
+ The most important class in the GDIPlus Architect portion of the solution.  This class 
+ is responsible for rendering a GDIDocument, responding to application wide state 
+ changes and redrawing documents, handling the current tool settings, and responding to 
+ mouse actions appropriately. 
+ </summary></member><member name="M:GDIPlusArchitect.GDISurface.New(GDIDocument)"><summary>
+ Creates a new instance of a GDISurface.  Sets up the properties typically 
+ set in InitializeComponent and sets various control styles (DoubleBuffer, 
+ UserPaint, ResizeRedraw) 
+ </summary>
+ <param name="doc" /></member><member name="P:GDIPlusArchitect.GDISurface.Zoom"><summary>
+ Gets or sets the Zoom Factor of the window.  This is how much the view is zoomed. 
+ </summary>
+ <value>A single (float) indicating the percent zoomed in or out.</value>
+ <remarks>This property is essential to 
+ understanding how GDI+ Architect works, since how tools are rendered and objects 
+  are drawn to the surface depends heavily on this property. 
+ </remarks></member><member name="M:GDIPlusArchitect.GDISurface.hitTestGuides"><summary>
+ Checks whether a the mouse is over a guide or not 
+ </summary>
+ <param name="ptObject" />
+ <param name="btn" /></member><member name="T:GDIPlusArchitect.Exp"><summary>
+ Serves as a base class for exporting images from GDI+ Architect documents. 
+ </summary></member><member name="M:GDIPlusArchitect.Exp.#ctor(System.String,System.String,System.String)"><summary>
+ Constructor for a new Exp object 
+ </summary>
+ <param name="name">Name of the type of exported document (Metafile, PNG, etc)</param>
+ <param name="MimeType">MimeType appropriate to the export type.</param>
+ <param name="FileFilter">Filter used in the save as dialogue to filter to appropriate 
+ types.</param></member><member name="M:GDIPlusArchitect.Exp.Export(GDIDocument,GDIPage,String)"><summary>
+ Requires implementation by inheritors.  Given a document and a page, exports the 
+ page to the image type of the inheritor to the path specified in the sFullpath 
+ argument. 
+ </summary>
+ <param name="doc">The document whose page is being exported</param>
+ <param name="pg">The page to export</param>
+ <param name="sFullpath">The target path to export to.</param></member><member name="M:GDIPlusArchitect.Exp.GetEncoderInfo"><summary>
+ Gets the  encoder that matches the Exp class MimeType. 
+ </summary>
+ <returns>An ImageCodedInfo object that can be used to encode the image.</returns></member><member name="M:GDIPlusArchitect.Exp.getBitmap(GDIDocument,GDIPage)"><summary>
+ Returns a 32 bit bitmap with the page to export rendered to its surface. 
+ </summary>
+ <param name="doc">The document being exported </param>
+ <param name="pg">The page to export </param>
+ <returns>A bitmap with the page rendered to its surface</returns></member><member name="M:GDIPlusArchitect.Exp.getBitmap(GDIDocument,GDIPage,Imaging.PixelFormat)"><summary>
+ Returns a bitmap with the page to export rendered to its surface in the format 
+ specified by the format argument (PixelFormat). 
+ </summary>
+ <param name="doc">The document being exported </param>
+ <param name="pg">The page to export </param>
+ <param name="format">format the bitmap is to be exported to.</param>
+ <returns>A bitmap with the page rendered to its surface in the format specified in the format argument.</returns></member><member name="T:GDIPlusArchitect.ExpBMP"><summary>
+ Responsible for exporting graphical bitmaps of pages 
+ </summary></member><member name="M:GDIPlusArchitect.ExpBMP.#ctor"><summary>
+ Constructs a new ExpBMP. 
+ </summary>
+ <param name="name" /></member><member name="M:GDIPlusArchitect.ExpBMP.Export(GDIDocument,GDIPage,String)"><summary>
+ Exports the current page to a bitmap 
+ </summary>
+ <param name="doc">Document being exported</param>
+ <param name="pg">Page to export</param>
+ <param name="sFullpath">Path to save the page to.</param></member><member name="T:GDIPlusArchitect.ExpDrawn"><summary>
+ Responsible for exporting drawn types to files. 
+ </summary></member><member name="M:GDIPlusArchitect.ExpDrawn.#ctor(System.String,System.String,System.String)"><summary>
+ Constructs a new instance of the ExpDrawn class. 
+ </summary>
+ <param name="name">Friendly name for the export type</param>
+ <param name="MimeType">MimeType of the export type</param>
+ <param name="FileFilter">Appropraite filter for save dialogue</param></member><member name="M:GDIPlusArchitect.ExpDrawn.getMetafile(String,GDIDocument,GDIPage)"><summary>
+ Generates a MetaFile of the current page 
+ </summary>
+ <param name="sFileName">The path to save the metafile to.</param>
+ <param name="doc">The parent document being exported.</param>
+ <param name="pg">The page being exported.</param>
+ <returns>A metafile containing the document.</returns></member><member name="T:GDIPlusArchitect.ExpJPEG"><summary>
+ Responsible for exporting the current page as a JPEG. 
+ </summary></member><member name="M:GDIPlusArchitect.ExpJPEG.#ctor"><summary>
+ Constructor for a new instance of the EXPJPG class 
+ </summary></member><member name="P:GDIPlusArchitect.ExpJPEG.Quality"><summary>
+ Gets or sets the quality of the exported JPEG 
+ </summary>
+ <value /></member><member name="M:GDIPlusArchitect.ExpJPEG.Export(GDIDocument,GDIPage,String)"><summary>
+ Creates a JPEG file 
+ </summary>
+ <param name="sFileName">The path to save the metafile to.</param>
+ <param name="doc">The parent document being exported.</param>
+ <param name="pg">The page being exported.</param></member><member name="T:GDIPlusArchitect.ExpMeta"><summary>
+ Responsible for Exporting the current page to a meta file. 
+ </summary></member><member name="M:GDIPlusArchitect.ExpMeta.#ctor"><summary>
+ Constructs a new intance of ExpMeta 
+ </summary></member><member name="M:GDIPlusArchitect.ExpMeta.Export(GDIDocument,GDIPage,String)"><summary>
+ 
+ </summary>
+ <param name="sFullPath">The path to save the jpeg to.</param>
+ <param name="doc">The parent document being exported.</param>
+ <param name="pg">The page being exported.</param></member><member name="T:GDIPlusArchitect.ExpMillions"><summary>
+ Serves as a base class for exporting to graphics with many colors 
+ </summary></member><member name="T:GDIPlusArchitect.ExpMillions.EnumBitQuality"><summary>
+ Enumeration that represents the quality of the export 
+ </summary></member><member name="M:GDIPlusArchitect.ExpMillions.#ctor(System.String,System.String,System.String)"><summary>
+ constructs a new export for millions of color type graphic files.. 
+ </summary>
+ <param name="name">Friendly name of the export type</param>
+ <param name="mimetype">Mime </param>
+ <param name="filter" /></member><member name="P:GDIPlusArchitect.ExpMillions.BitQuality"><summary>
+ The Quality of the export 
+ </summary>
+ <value>An EnumBitQuality that indicates the quality of the export.</value></member><member name="T:GDIPlusArchitect.ExportFormats"><summary>
+ Provides a constainer for the various types of graphic exports that GDI+ 
+ Architect accomodates. 
+ </summary></member><member name="M:GDIPlusArchitect.ExportFormats.#ctor"><summary>
+ Creates a new instance of the ExportFormats class 
+ </summary></member><member name="M:GDIPlusArchitect.ExportFormats.populateformats"><summary>
+ Populates the class with various export formats. 
+ </summary></member><member name="P:GDIPlusArchitect.ExportFormats.Item(System.Int32)"><summary>
+ Property Accessor for the ExportFormats collection 
+ </summary>
+ <param name="iIndex">Index to retrieve the export format at.</param>
+ <value>Returns an Exp inheritor</value></member><member name="T:GDIPlusArchitect.ExpPNG"><summary>
+ Class that handles exporting PNGs 
+ </summary></member><member name="M:GDIPlusArchitect.ExpPNG.#ctor(System.String)"><summary>
+ Creates a new instance of the ExpPNG class (for exporting PNGS) 
+ </summary>
+ <param name="name" /></member><member name="M:GDIPlusArchitect.ExpPNG.Export(GDIDocument,GDIPage,String)"><summary>
+ Exports the current page to a PNG 
+ </summary>
+ <param name="doc">The document to export </param>
+ <param name="pg">The page to export </param>
+ <param name="sFullpath">The path to save the PNG to.</param></member><member name="T:GDIPlusArchitect.ExpTIFF"><summary>
+ Exports the current page to a TIFF 
+ </summary></member><member name="M:GDIPlusArchitect.ExpTIFF.#ctor(System.String)"><summary>
+ Creates a new instance of the ExpTiff object 
+ </summary>
+ <param name="name">Friendly name to give the instance.</param></member><member name="M:GDIPlusArchitect.ExpTIFF.Export(GDIDocument,GDIPage,String)"><summary>
+ Exports the current page to a TIFF. 
+ </summary>
+ <param name="doc">The current document </param>
+ <param name="pg">The page to export</param>
+ <param name="sFullpath">A full path to the place to save the TIFF.</param></member><member name="P:GDIPlusArchitect.AlignManager.AlignMode"><summary>
+ The current align mode. 
+ </summary>
+ <value /></member><member name="T:GDIPlusArchitect.EventBroker"><summary>
+ Provides a wrapper for events raised from the GDIObjects Session object as well 
+ as changes in options at the User interface level.  This class is responsible for 
+ informing interested parties of the Stroke changeed, fill changed, and options changed 
+ events. 
+ 
+ 
+ </summary>
+ ''' <remarks>The events this class is designed to handle do not belong to a specific 
+ document instance which is why this class exists.  Whereas the other delegates are on a 
+ document by document basis, the current fill or stroke is something that is not related 
+ to a specific document since the user may have multiple documents open.  This class 
+ provides a method of dealing with just that scenario. 
+ </remarks></member><member name="M:GDIPlusArchitect.EventBroker.#ctor"><summary>
+ Creates a new instance of the SessionHandler.  Assigns appropriate call backs. 
+ </summary></member><member name="M:GDIPlusArchitect.EventBroker.handleFillChange"><summary>
+ Notified the fill panel and tool box of a new fill.  Also notified that current 
+ surface, if any of the change so it can fill a selected object with the new fill 
+ if appropriate. 
+ </summary></member><member name="M:GDIPlusArchitect.EventBroker.handleStrokeChange"><summary>
+ Notifies the stroke panel and the tool box panel of new strokes.  Also notified 
+ the surface in case an object is selected, in which case we want to apply the new 
+ stroke to the selected object. 
+ </summary></member><member name="M:GDIPlusArchitect.HelpManager.InvokeHelpContents"><summary>
+ Invoked the content section of the help provider without a specific provider 
+ </summary></member><member name="M:GDIPlusArchitect.HelpManager.InvokeHelpContents(System.String)"><summary>
+ Invokes the contents from the help provider for a specific topic 
+ </summary>
+ <param name="sTopic">The topic investigate help for</param>
+ <remarks>The existence of TextWin is checked so that we know that the application 
+ is ready to invoke help. 
+ </remarks></member><member name="M:GDIPlusArchitect.HelpManager.InvokeHelpIndex"><summary>
+ Invokes the index from the Help Provider 
+ </summary>
+ <remarks>The existence of TextWin is checked so that we know that the application 
+ is ready to invoke help. 
+ </remarks></member><member name="M:GDIPlusArchitect.HelpManager.InvokeHelpSearch"><summary>
+ Invokes search from the Help Provider. 
+ </summary>
+ <remarks>The existence of TextWin is checked so that we know that the application 
+ is ready to invoke help. 
+ </remarks></member><member name="T:GDIPlusArchitect.IconManager"><summary>
+ Responsible for managing a collcetion of Icons in GDI+ Architect. 
+ </summary></member><member name="T:GDIPlusArchitect.IconManager.EnumIcons"><summary>
+ Holds an enumeration of the various icons used in GDI+ Architect 
+ </summary></member><member name="P:GDIPlusArchitect.IconManager.IconImageList"><summary>
+ Returns an image list that other objects in the application use to assign their 
+ icons 
+ </summary>
+ <value>A populated image list</value></member><member name="P:GDIPlusArchitect.IconManager.CursorMagnify"><summary>
+ Returns the magnify cursor 
+ </summary>
+ <value>The magnify cursor</value></member><member name="P:GDIPlusArchitect.IconManager.CursorDropper"><summary>
+ Returns the dropper cursor 
+ </summary>
+ <value>The magnify cursor</value></member><member name="P:GDIPlusArchitect.IconManager.CursorBucket"><summary>
+ Returns the bucket cursor 
+ </summary>
+ <value>The magnify cursor</value></member><member name="P:GDIPlusArchitect.IconManager.CursorHand"><summary>
+ Returns the hand cursor 
+ </summary>
+ <value>The magnify cursor</value></member><member name="M:GDIPlusArchitect.IconManager.#ctor"><summary>
+ Creates a new instance of the Icons class. Responsible for loading the icons 
+ into the image list 
+ </summary></member><member name="M:GDIPlusArchitect.IconManager.LoadCursor(System.String)"><summary>
+ Helper functio nto load cursors from an identifier. 
+ </summary>
+ <param name="strIdentifier">A  path to the embedded cursor resource</param>
+ <returns /></member><member name="M:GDIPlusArchitect.IconManager.GetIconResource(System.String)"><summary>
+ Helper function to get an icon from an embedded resource. 
+ </summary>
+ <param name="strIdentifier">A path to the embedded resource.</param>
+ <returns /></member><member name="M:GDIPlusArchitect.IconManager.GetBitmap(System.String)"><summary>
+ Gets a bitmap from an embedded  resource. 
+ </summary>
+ <param name="strIdentifier">A path to the embedded bitmap resource.</param>
+ <returns>The Drawing.Bitmap file at the path</returns></member><member name="M:GDIPlusArchitect.IconManager.dispose(System.Boolean)"><summary>
+ Disposes of the list of icons and cursors 
+ </summary>
+ <param name="disposing" /></member><member name="T:GDIPlusArchitect.OptionsManager"><summary>
+ Provides a mechanism for persisting and getting at application wide settings. 
+ </summary></member><member name="M:GDIPlusArchitect.OptionsManager.LoadOptions"><summary>
+ Attempts to load options from isolated storage.  If this fails, returns an instance 
+ of options with default settings. 
+ </summary>
+ <returns /></member><member name="M:GDIPlusArchitect.OptionsManager.New"><summary>
+ Builds a new instance of the options class.   Note the scope of this constructor 
+ would ideally be private, but .NET serialization requires a public default 
+ contructor. 
+ The idea behind creating the Options class is that the consumer of this class 
+ is expected to call LoadOptions to get the reference.If isolated storage 
+ retrieval fails, the Options class quietly instantiates itself 
+ </summary></member><member name="M:GDIPlusArchitect.OptionsManager.Revert"><summary>
+ Reverts options to the values they shipped with. 
+ </summary></member><member name="M:GDIPlusArchitect.OptionsManager.setDefaults"><summary>
+ Sets the options to the state they shipped with 
+ </summary></member><member name="M:GDIPlusArchitect.OptionsManager.GetFirstTexture"><summary>
+ Assures that at least one texture exists and returns this texture. 
+ </summary>
+ <returns /></member><member name="M:GDIPlusArchitect.OptionsManager.setSessionProps"><summary>
+ Sets  the GDIObject's Session object properties based on the current options 
+ </summary></member><member name="M:GDIPlusArchitect.OptionsManager.addRecentFile(String)"><summary>
+ Adds a recent file to the recent file list. 
+ </summary>
+ <param name="sPath">The path to append to the list.</param></member><member name="M:GDIPlusArchitect.OptionsManager.SerializeColor(Color)"><summary>
+ Converts a color to an XML representation 
+ </summary>
+ <param name="color" />
+ <returns>A color in XML format</returns></member><member name="M:GDIPlusArchitect.OptionsManager.DeserializeColor(String)"><summary>
+ Converts from an XML representation of a color to a System.Drawing.Color 
+ </summary>
+ <param name="sColor" />
+ <returns /></member><member name="M:GDIPlusArchitect.OptionsManager.SaveOptions"><summary>
+ Saves the options to isolated storage as XML 
+ </summary></member><member name="M:GDIPlusArchitect.OptionsManager.GetFromIsolatedStorage"><summary>
+ Retrieves previously saved options from isolated storage 
+ </summary>
+ <returns>A fully populated Options class</returns></member><member name="P:GDIPlusArchitect.OptionsManager.Font"><summary>
+ Gets or sets the Font.  Notice the XmlIgnore attributes of the Font property. 
+ To make this property serializable to XML would require a custom serialization 
+ formatter similar to how colors are serialized in this class. 
+ </summary>
+ <value /></member><member name="M:GDIPlusArchitect.PanelManager.LoadPanelLayout"><summary>
+ Loads the last known docking state. 
+ </summary>
+ <param name="DockingManager" /></member><member name="F:GDIPlusArchitect.PanelManager.End"><summary>
+ Serializes dotnetmagic's last good docking state. 
+ </summary>
+ <param name="DockingManager" /></member><member name="M:GDIPlusArchitect.PanelManager.ShowPanels"><summary>
+ Makes the panel set visible 
+ </summary></member><member name="M:GDIPlusArchitect.PanelManager.HidePanels"><summary>
+ Makes the panel set invisible 
+ </summary></member><member name="F:GDIPlusArchitect.ToolManager._SelectedGuide"><summary>
+ The currently Currently selected Guide, if any. 
+ </summary></member><member name="P:GDIPlusArchitect.ToolManager.InTextEdit"><summary>
+ Returns whether the tool manager is in text edit mode or not 
+ </summary>
+ <value>A boolean indicating if the tool manager is in text edit mode</value></member><member name="M:GDIPlusArchitect.ToolManager.AttemptTextSelection(System.Drawing.PointF)"><summary>
+ Tries to select text in the current TextTool based on a hit point on the surface 
+ </summary>
+ <param name="ptobject">Down point where character selection should occur </param></member><member name="M:GDIPlusArchitect.ToolManager.ClickinTextbox(System.Drawing.PointF,System.Single)"><summary>
+ Lets the texttool respond to clicking inside the text box.  Returns a boolean 
+ indicating if the click was within the box.  The surface uses this to determine 
+ if it should stop text editing mode (users expect a click outside a box to stop 
+ current editing) 
+ </summary>
+ <param name="pt">The point to check if in box.</param>
+ <returns>A boolean indicating if the hit was in the box or not</returns></member><member name="M:GDIPlusArchitect.ToolManager.handleTextDoubleClick(System.Drawing.PointF)"><summary>
+ Lets the text tool handle a double click operation.  This implies moving to 
+ a new character position. 
+ </summary>
+ <param name="pt">The point at which the double click occurred</param></member><member name="M:GDIPlusArchitect.ToolManager.handleTextKeyDown(System.Windows.Forms.KeyEventArgs)"><summary>
+ Allows the text tool to handle a key down event. 
+ </summary>
+ <param name="e">The key pressed as a KeyEventArgs enumeration</param>
+             '''</member><member name="M:GDIPlusArchitect.ToolManager.notifyTextDelete"><summary>
+ Sends a delete notification to the current TextTool 
+ </summary></member><member name="M:GDIPlusArchitect.ToolManager.handleTextKeyPress(System.Windows.Forms.KeyPressEventArgs)"><summary>
+ Allows the text tool to handle a key press event 
+ </summary>
+ <param name="e">The key pressed as a KeyEventArgs enumeration</param></member><member name="M:GDIPlusArchitect.ToolManager.notifyTextCopy"><summary>
+ Notifies the text tool of a copy command 
+ </summary></member><member name="M:GDIPlusArchitect.ToolManager.notifyTextUndo"><summary>
+ Notifies the text tool of an undo command 
+ </summary></member><member name="M:GDIPlusArchitect.ToolManager.notifyTextRedo"><summary>
+ Notifies the text tool of a redo command 
+ </summary></member><member name="M:GDIPlusArchitect.ToolManager.notifyTextPaste(System.String)"><summary>
+ Notifies the text tool of a paste command 
+ </summary>
+ <param name="sText">The text to paste</param></member><member name="M:GDIPlusArchitect.ToolManager.NotifyTextCut"><summary>
+ Notifies the text tool a cut operation is occurring. 
+ </summary></member><member name="M:GDIPlusArchitect.ToolManager.BeginDragHandle(GDIObject,EnumDragHandles,Point)"><summary>
+ Begins a drag handle operation.  Creates a draghandle tool. 
+ </summary>
+ <param name="obj">Object to resize</param>
+ <param name="initHandle">The handle being resized</param>
+ <param name="ptInitial">The point where the handle was positioned at.</param></member><member name="M:GDIPlusArchitect.ToolManager.BeginDragging(System.Drawing.Point)"><summary>
+ Begins a drag operation.  Creates a dragtool. 
+ </summary>
+ <param name="ptSnapped">Point where dragging began, snapped appropriately.</param></member><member name="M:GDIPlusArchitect.ToolManager.BeginBounding(System.Drawing.Point)"><summary>
+ Begins a bounding box operation.  Creates a boundingtool. 
+ </summary>
+ <param name="ptSnapped">Point where bounding began, snapped appropriately.</param></member><member name="M:GDIPlusArchitect.ToolManager.BeginImagePlace(System.Drawing.Point,System.String)"><summary>
+ Starts an image place operation.  Creates a new place tool. 
+ </summary>
+ <param name="ptsnapped">point to begin placing the image at, snapped appropriately</param>
+ <param name="sImageSource">A full path to the image resource being placed.</param></member><member name="M:GDIPlusArchitect.ToolManager.BeginField(System.Drawing.Point)"><summary>
+ Starts creating a field tool with variable width. 
+ </summary>
+ <param name="ptSnapped">Top left point of the new field, snapped appropriately</param></member><member name="M:GDIPlusArchitect.ToolManager.BeginLine(System.Drawing.Point)"><summary>
+ Starts creating a line on a surfcae.  Creates a new LineTool. 
+ </summary>
+ <param name="ptorigin" /></member><member name="M:GDIPlusArchitect.ToolManager.BeginText(System.Drawing.Point)"><summary>
+ Creates a new textbox and places the surface into text edit mode. 
+ </summary>
+ <param name="ptOrigin">Top left point where text is being added</param></member><member name="M:GDIPlusArchitect.ToolManager.BeginTextEditMode"><summary>
+ Starts text edit mode for a GDIText field on the surface. 
+ </summary></member><member name="M:GDIPlusArchitect.ToolManager.EndTextEditMode"><summary>
+ Ends text edit mode. 
+ </summary></member><member name="M:GDIPlusArchitect.ToolManager.BeginText(System.Drawing.Rectangle)"><summary>
+ Creates a new GDIText instance with a fixed width. 
+ </summary>
+ <param name="rect">Rectangle that defines the position of the fixed width box</param></member><member name="M:GDIPlusArchitect.ToolManager.BeginShape(System.Drawing.Point)"><summary>
+ Starts a draw operation.  Creates a DrawingTool instance. 
+ </summary>
+ <param name="ptSnapped">Point where drawing should begin, snapped appropriately.</param></member><member name="M:GDIPlusArchitect.ToolManager.BeginPen(System.Drawing.Point)"><summary>
+ Begins a pen tool operation.  Creates a PenTool object. 
+ </summary>
+ <param name="ptSnapped">Point where the pen should begin, snapped appropriately.</param></member><member name="M:GDIPlusArchitect.ToolManager.BeginDefineTextbox(System.Drawing.Point)"><summary>
+ Begins a fixed width text box operation.  The TextDragBox tool is used when the 
+ user is defining a fixed width text box. 
+ </summary>
+ <param name="ptSnapped">Top left corner to begin creating the textbox at, snapped appropriately.</param></member><member name="M:GDIPlusArchitect.ToolManager.BeginTextEdit(GDIText,Point,Int32)"><summary>
+ Starts a text editing operation.  Creates a new TextTool instance. 
+ </summary>
+ <param name="textobj">The </param>
+ <param name="pt" />
+ <param name="icharindex" /></member><member name="M:GDIPlusArchitect.ToolManager.AddPenPoint"><summary>
+ Adds a new pen point to a current pen tool. 
+ </summary>
+ <returns>A boolean value indicating if the pen tool has closed its current 
+ path.  If it has, this becomes a closed path object.</returns></member><member name="M:GDIPlusArchitect.ToolManager.EndTool(System.Boolean)"><summary>
+ Generic end tool operation.  Used for most tools to indicate the surface is 
+ done with the tool. 
+ </summary></member><member name="M:GDIPlusArchitect.ToolManager.EndTextBounds(System.Boolean)"><summary>
+ Ends a Text  bounds operation, returning the new rectangle bounds. 
+ </summary>
+ <returns>A rectangle into which the text object should fit.</returns></member><member name="M:GDIPlusArchitect.ToolManager.UpdateTool(System.Drawing.Point,System.Windows.Forms.MouseButtons,System.Boolean,System.Single)"><summary>
+ Lets a tool update themselves in response to changes in mouse positions and 
+ buttons 
+ </summary>
+ <param name="pt">the latest mouse point</param>
+ <param name="btn">the mouse button being held</param></member><member name="M:GDIPlusArchitect.ToolManager.draw(System.Drawing.Graphics,System.Single)"><summary>
+ Draws the current tool to a graphics context 
+ </summary>
+ <param name="g">Graphics context to draw against.</param>
+ <param name="fScale">Current zoom factor of the surface</param>
+ <remarks>
+</remarks></member><member name="P:GDIPlusArchitect.ToolManager.ArmedImageSrc"><summary>
+ Gets or sets a path to an armed image source 
+ </summary>
+ <value /></member><member name="P:GDIPlusArchitect.ToolManager.SelectedGuide"><summary>
+ Gets or sets the application wide selected guide. 
+ </summary>
+ <value>A GDIGuide</value></member><member name="P:GDIPlusArchitect.ToolManager.ToolCursor"><summary>
+ Returns the current cursor 
+ </summary>
+ <value /></member><member name="P:GDIPlusArchitect.ToolManager.GlobalMode"><summary>
+ Returns the current tool mode (the selected tool in the toolbox) 
+ </summary>
+ <value>An enumTools</value></member><member name="T:GDIPlusArchitect.ToolTipManager"><summary>
+ Responsible for managing all of the tooltips used in GDI+ Architect. 
+ </summary></member><member name="M:GDIPlusArchitect.ToolTipManager.#ctor"><summary>
+ Creates a new instance of the ToolTipManager. 
+ </summary></member><member name="P:GDIPlusArchitect.ToolTipManager.ToolTipXML"><summary>
+ Gets the XML document of tool tips from the embedded resource or from the _xml 
+ member if available. 
+ </summary>
+ <value /></member><member name="M:GDIPlusArchitect.ToolTipManager.hasTipForControl(System.String,System.Windows.Forms.Control)"><summary>
+ Gets a boolean indicating whether a given control has a tool tip or not. 
+ </summary>
+ <param name="sSection">The section name to look under for the tool tip in the 
+ xml document</param>
+ <param name="ctl">The control to check for a tooltip for.</param>
+ <returns>A boolean indicating if a tooltip exists for the document</returns></member><member name="M:GDIPlusArchitect.ToolTipManager.getText(System.String,System.Windows.Forms.Control)"><summary>
+ Returns the tooltip text for a specific control within a specific section of the 
+ xml document. 
+ </summary>
+ <param name="sSection">The section name to look under for the tool tip in the 
+ xml document</param>
+ <param name="ctl">The control to check for a tooltip for.</param>
+ <returns /></member><member name="M:GDIPlusArchitect.ToolTipManager.AssignTips(System.Windows.Forms.ToolTip,System.String,System.Windows.Forms.Control.ControlCollection)"><summary>
+ Assigns the appropriate tooltip in the xml source to a specific tooltip control 
+ </summary>
+ <param name="tip">The tool tip to assign to</param>
+ <param name="sSection">The section to look for the tool tip in.</param>
+ <param name="ctls">The control to assign the tip to.</param></member><member name="M:GDIPlusArchitect.ToolTipManager.PopulatePopupTip(System.Windows.Forms.ToolTip,System.String,System.Windows.Forms.Form)"><summary>
+ Populates a pop up form (one that does not exist for the lifetime of the application) 
+ with its appropriate tool tips 
+ </summary>
+ <param name="tip">The tool tip control to assign the tips to.</param>
+ <param name="Section">The section to look for tooltips in the xml document for</param>
+ <param name="frm">The Windows form that needs tool tip information.</param></member><member name="M:GDIPlusArchitect.ToolTipManager.AssignPanelTip(System.String,System.Windows.Forms.Control.ControlCollection)"><summary>
+ Assigns the appropriate tooltip in the xml source to a specific tooltip control 
+ </summary>
+ <param name="tip">The tool tip to assign to</param>
+ <param name="sSection">The section to look for the tool tip in.</param>
+ <param name="ctls">The control to assign the tip to.</param></member><member name="T:GDIPlusArchitect.GDIMenu"><summary>
+ Implements MDIMain's menu.  Many thanks to Crownwood for their originally free magic controls. 
+ </summary></member><member name="M:GDIPlusArchitect.GDIMenu.#ctor"><summary>
+ Creates a new instance of a GDIMenu class.  Creates the menu heirarchy and 
+ sets checked menus based on application wide options. 
+ </summary></member><member name="M:GDIPlusArchitect.GDIMenu.onDocumentChanged"><summary>
+ Rebuilds the list of recently saved files under the File menu. 
+ </summary></member><member name="M:GDIPlusArchitect.GDIMenu.updateStyle"><summary>
+ Updates the style of menu items baed on the currently selected options 
+ </summary></member><member name="P:GDIPlusArchitect.GDIMenu.TopLevelMenu"><summary>
+ Gets a reference to the top level menucontrol 
+ </summary>
+ <value /></member><member name="M:GDIPlusArchitect.GDIMenu.OnCut(System.Object,System.EventArgs)"><summary>
+ Responds to a Cut command.  If editing text, sends the cut command to the surface. 
+ Otherwise lets the document's selected set handle the cut operation. 
+ </summary>
+ <param name="s" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.GDIMenu.OnPaste(System.Object,System.EventArgs)"><summary>
+ Responds to a Paste command.  If editing text, sends the paste command to the surface. 
+ Otherwise lets the document's selected set handle the paste operation. 
+ </summary>
+ <param name="s" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.GDIMenu.OnFont(System.Object,System.EventArgs)"><summary>
+ Launches the font dialogue to let the user select a font.  The same functionality 
+ can be obtained using the TextWin. 
+ </summary>
+ <param name="s" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.GDIMenu.OnUndo(System.Object,System.EventArgs)"><summary>
+ Performs a step of undo.  If in text mode, notifies the surface of the undo, 
+ otherwise notifies the document. 
+ </summary>
+ <param name="s" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.GDIMenu.OnRedo(System.Object,System.EventArgs)"><summary>
+ Performs a step of redo.  If in text mode, notifies the surface of the redo, 
+ otherwise notifies the document. 
+ </summary>
+ <param name="s" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.GDIMenu.OnDelete(System.Object,System.EventArgs)"><summary>
+ Handles a delete command.  If in text edit mode, sends the delete to the 
+ surface.  Otherwise sends it to the selected object set. 
+ </summary>
+ <param name="s" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.GDIMenu.OnCopy(System.Object,System.EventArgs)"><summary>
+ Responds to a copy command.  If editing text, sends the copy command 
+ to the surface. Otherwise lets the document's selected set handle the 
+ copy operation. 
+ </summary>
+ <param name="s" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.GDIMenu.OnPasteAttributes(System.Object,System.EventArgs)"><summary>
+ Responds to a paste attributes menu command.  Asks the current GDIDocument 
+ to handle the pasteAttributes request. 
+ </summary>
+ <param name="s" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.GDIMenu.OnOptionsChanged"><summary>
+ Responds to changes in application wide Options from the GDISession object 
+ </summary></member><member name="M:GDIPlusArchitect.GDIMenu.refreshAlignTo"><summary>
+ Refreshes align to mode 
+ </summary></member><member name="M:GDIPlusArchitect.GDIMenu.refreshmenuView"><summary>
+ Refreshes the entire menu, disabling and enabling menu commands and marking checks 
+ appropriate  for the current state of the incoming document and 
+ application wide option settings. 
+ </summary>
+ <param name="doc">The current GDIDocument</param>
+ <remarks>Menu commands may be disabled or enabled for a number of reasons. 
+ 1) Is there a document at all 
+ 2) Are any items on the document selected 
+ 3) Are two or more items on the document selected 
+ 4) Is the type of the current GDIDocument (graphics class or PrintDocument 
+ style) appropriate for a  menu command 
+ </remarks></member><member name="M:GDIPlusArchitect.GDIMenu.recurseAssignImages(Crownwood.Magic.Collections.MenuCommandCollection)"><summary>
+ Assigns all of the menu's imagelists 
+ causing the menu items to display images. 
+ </summary>
+ <param name="mnucol" /></member><member name="M:GDIPlusArchitect.GDIMenu.recurseUnassignImages(Crownwood.Magic.Collections.MenuCommandCollection)"><summary>
+ Removes all references to the image list from all menu items, in effet removing 
+ icons from the displayed menus. 
+ </summary>
+ <param name="mnucol" /></member><member name="T:GDIPlusArchitect.SurfaceContextMenu"><summary>
+ Implements the context menu that shows in response to a right click on the 
+ drawing surface. 
+ </summary>
+ <remarks>Rather than document each one liner, an overview of what this class 
+ does is more valuable. 
+ </remarks></member><member name="M:GDIPlusArchitect.SurfaceContextMenu.#ctor"><summary>
+ Creates a new instance of the SurfaceContextMenu object. 
+ </summary></member><member name="M:GDIPlusArchitect.SurfaceContextMenu.show(System.Drawing.Point)"><summary>
+ Shows the context menu at the point specified bt pt. 
+ </summary>
+ <param name="pt">The point the mouse was invoked at to show the context menu.</param></member><member name="M:GDIPlusArchitect.SurfaceContextMenu.createMenus"><summary>
+ Creates the menu items used in the surface context menu. 
+ </summary></member><member name="M:GDIPlusArchitect.SurfaceContextMenu.createMenuItems"><summary>
+ Creates the menu hierarchy items that fall under the main menu types. 
+ </summary></member><member name="M:GDIPlusArchitect.SurfaceContextMenu.recreateSenseMenu"><summary>
+ Recreates the context sensitive menu based upon the current selection. 
+ </summary></member><member name="M:GDIPlusArchitect.SurfaceContextMenu.refreshmenuView"><summary>
+ Enables and disabled menu items based upon the current state of the application. 
+ </summary>
+ <remarks>The requirements for enabled vary based upon the type of command. 
+ There are three different situations that can occur. 
+ 1) A menu item may require a document. 
+ 2) A menu item may require a selected item 
+ 3) A menu item may require more than one selected item. 
+ </remarks></member><member name="M:GDIPlusArchitect.SurfaceContextMenu.OnPaste(System.Object,System.EventArgs)"><summary>
+ Handles a paste command from the clip board 
+ </summary></member><member name="M:GDIPlusArchitect.SurfaceContextMenu.OnQuickViewCode(System.Object,System.EventArgs)"><summary>
+ Handles the quick code command. 
+ </summary></member><member name="M:GDIPlusArchitect.SurfaceContextMenu.OnQuickSVG(System.Object,System.EventArgs)"><summary>
+ Handles the Quick SVG command. 
+ </summary></member><member name="M:GDIPlusArchitect.SurfaceContextMenu.OnSVGBrowser(System.Object,System.EventArgs)"><summary>
+ Handle the SVG "browse" command 
+ </summary>
+ <param name="s" />
+ <param name="e" /></member><member name="T:GDIPlusArchitect.NVPair"><summary>
+ Provides a simple wrapper for pairs of name/int32 value information (eg ID=1, name=foo) 
+ </summary></member><member name="M:GDIPlusArchitect.NVPair.#ctor(System.Int32,System.String)"><summary>
+ Creates a new NVPair instance 
+ </summary>
+ <param name="Id">The ID (value) of the NVPair</param>
+ <param name="name">The name of the NVPair</param></member><member name="P:GDIPlusArchitect.NVPair.ID"><summary>
+ Gets or sets the ID of the NVPair item. 
+ </summary>
+ <value>The ID of the NVPair</value></member><member name="P:GDIPlusArchitect.NVPair.Name"><summary>
+ Gets or sets the name of the NVPair item 
+ </summary>
+ <value>The name of the nvpair</value></member><member name="M:GDIPlusArchitect.NVPair.toString"><summary>
+ Returns a string representation of the NVPair (the name of the item) 
+ </summary>
+ <returns /></member><member name="T:GDIPlusArchitect.OpenFolderDialog"><summary>
+ Provides a mechanism for selecting a folder 
+ </summary></member><member name="M:GDIPlusArchitect.OpenFolderDialog.#ctor"><summary>
+ Creates a new instance of the OpenFolderDialog 
+ </summary></member><member name="M:GDIPlusArchitect.OpenFolderDialog.GetFolder"><summary>
+ Requests a folder from the user using the folder browser and returns the 
+ path returned from the folder browser. 
+ </summary>
+ <returns /></member><member name="T:GDIPlusArchitect.Splash"><summary>
+ The GDI+ Architect Splash screen. 
+ </summary></member><member name="T:GDIPlusArchitect.Utility"><summary>
+ Provides a wrapper for complex mathematical formulas used in multiple places 
+ within the application. 
+ </summary></member><member name="M:GDIPlusArchitect.Utility.PickColor(System.Drawing.Color)"><summary>
+ Invokes the color picker 
+ </summary>
+ <param name="initColor">Initial color to set the picker to.</param>
+ <returns>The selected color or an empty color if the user elected ot 
+ cancel the dialogue.</returns></member><member name="M:GDIPlusArchitect.Utility.DistanceBetweenPoints(System.Drawing.Point,System.Drawing.Point)"><summary>
+ Returns the distance between two points. 
+ </summary>
+ <param name="pt1">The first point</param>
+ <param name="pt2">The second point</param>
+ <returns>The distance between pt1 and pt2</returns>
+ <remarks> The distance between two points is: 
+  sqrt( (x1 - x2)^2  +  (y1 - y2)^2  ) 
+ </remarks></member><member name="M:GDIPlusArchitect.Utility.ShiftedDownPoint(System.Drawing.Point,System.Drawing.Point)"><summary>
+ Returns the point that is appropriate when Shift is being held down while 
+ manipulating a point to point type of shape. 
+ 
+ The user expects when shift is being held that 45 degree lines will be drawn. 
+ 
+ This functionality determines to which 45 degree angle the point should snap. 
+ </summary>
+ <param name="ptorigin">the origin point from the shift</param>
+ <param name="ptsnapped">The mouse position with a snapped to grid operation 
+ already performed</param>
+ <returns>A point appropriate for a shift held operation</returns></member><member name="T:GDIPlusArchitect.ArrangeWin"><summary>
+ Provides a user interface to perform various alignment operations to selected object(s). 
+ </summary></member><member name="M:GDIPlusArchitect.ArrangeWin.#ctor"><summary>
+ Constructs a new ArrangeWin.  Sets up the image links to buttons and gets the 
+ initial values of align to canvas or align to margin. 
+ </summary></member><member name="M:GDIPlusArchitect.ArrangeWin.refreshPanel"><summary>
+ Enables and disabled appropriately based upon how many objects are currently 
+ selected in a document. 
+ </summary>
+ <param name="doc">The document which is currently selected.</param></member><member name="M:GDIPlusArchitect.ArrangeWin.refreshAlignTo"><summary>
+ Refreshes the align to canvas and align to margins button based upon the current 
+ alignmode in the Session object. 
+ </summary></member><member name="M:GDIPlusArchitect.ArrangeWin.disableAlignCommands"><summary>
+ Disables all align commands. 
+ </summary></member><member name="M:GDIPlusArchitect.ArrangeWin.enableAlignCommands"><summary>
+ Enables all align commands 
+ </summary></member><member name="M:GDIPlusArchitect.ArrangeWin.initImages"><summary>
+ Sets the image indexes and image lists of the buttons on the alignment panel 
+ </summary></member><member name="M:GDIPlusArchitect.ArrangeWin.pshCanvas_Click(System.Object,System.EventArgs)"><summary>
+ Responds to clicks on the Canvas button. Toggles margins if selected and sets the 
+ session align variable appropriately.  Notifies the GDIMenu of changes in the AlignTo 
+ so it can update its user interface. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.ArrangeWin.pshMargins_Click(System.Object,System.EventArgs)"><summary>
+ Responds to clicks on the Margin button. Toggles canvas if selected and sets the 
+ session align variable appropriately.  Notifies the GDIMenu of changes in the AlignTo 
+ so it can update its user interface. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.CodeWin.refreshPanel"><summary>
+ Refreshes the currently generated code.  This method first checks if code 
+ generation has been disabled under user options since this is an expensive 
+ bit.  It then determines the mode to generate code in and asks the GDIDocument 
+ specified in the doc argument to generate the code. 
+ </summary>
+ <param name="doc">The document to generate code for</param></member><member name="M:GDIPlusArchitect.CodeWin.cboView_SelectedIndexChanged(System.Object,System.EventArgs)"><summary>
+ Responds to changes in the drop down view combo, changing what type of code is generated. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="T:GDIPlusArchitect.FillWin"><summary>
+ Provides an interface for setting the current fill, applying fills to selected objects, 
+ and seeing the properties of fills. 
+ </summary></member><member name="M:GDIPlusArchitect.FillWin.#ctor"><summary>
+ Creates a new intance of the Fill Window. 
+ </summary></member><member name="M:GDIPlusArchitect.FillWin.refreshPanel"><summary>
+ The current fill can potentially be set from a variety of soures.  This 
+ includes the dropper tool, dgFillPicker, and the FillWin itself.  The current fill 
+ is stored in Session.  This method updates the FillWin to reflect the 
+ state of that fill, regardless of how it got set. 
+ </summary>
+ <remarks>Notice that this method short circuits with the _Updating argument 
+ </remarks></member><member name="M:GDIPlusArchitect.FillWin.updateFill"><summary>
+ Responds to changes in cboFills.SelectedIndex, indicating that a new fill 
+ has been chosen. 
+ </summary>
+ <remarks>A more elegant solution may have used an apply button to note that 
+ the user wants to change the fill rather than browse the options available. 
+ </remarks></member><member name="M:GDIPlusArchitect.FillWin.showSolid"><summary>
+ Moves the solid panel to the front and sets its values appropriately 
+ </summary></member><member name="M:GDIPlusArchitect.FillWin.showHatch"><summary>
+ Moves the hatch panel to the front and sets its values appropriately 
+ </summary></member><member name="M:GDIPlusArchitect.FillWin.showTexture"><summary>
+ Moves the texture panel to the front and sets its values appropriately 
+ </summary></member><member name="M:GDIPlusArchitect.FillWin.showGradient"><summary>
+ Moves the gradient panel to the front and sets its values appropriately 
+ </summary></member><member name="M:GDIPlusArchitect.FillWin.picGrad1_Click(System.Object,System.EventArgs)"><summary>
+ Responds to clicks on the first gradient color box which initiates color selection 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.FillWin.picGrad2_Click(System.Object,System.EventArgs)"><summary>
+ Responds to clicks on the second gradient color box which initiates color selection 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.FillWin.picHatchBack_Click(System.Object,System.EventArgs)"><summary>
+ Responds to clicks on the back color hatch box which initiates color selection 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.FillWin.picHatchFore_Click(System.Object,System.EventArgs)"><summary>
+ Responds to clicks on the fore color hatch box which initiates color selection 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.FillWin.cboHatchStyle_SelectedValueChanged(System.Object,System.EventArgs)"><summary>
+ Responds to changes in the hatch style drop down. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.FillWin.btnTexture_Click(System.Object,System.EventArgs)"><summary>
+ Requests a texture source from the user 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.FillWin.cboGradient_SelectedValueChanged(System.Object,System.EventArgs)"><summary>
+ Changes the current gradient mode in response to a change in cboGradient.  If the 
+ custom mode is chosen, displays the custom mode panel as well. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.FillWin.txtCustomGradientAngle_Validating(System.Object,System.ComponentModel.CancelEventArgs)"><summary>
+ Validates a custom gradient angle 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.FillWin.txtCustomGradientAngle_Validated(System.Object,System.EventArgs)"><summary>
+ Sets the value on the custom gradient if valid 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.FillWin.txtCustomGradientAngle_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)"><summary>
+ Sets the custom gradient angle on a hard return 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.FillWin.picSolid_Click(System.Object,System.EventArgs)"><summary>
+ Brings up the color selector when the solid preview is clicked 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.FillWin.cboLibrary_SelectedValueChanged(System.Object,System.EventArgs)"><summary>
+ Handles changes to the selected texture in the texture library drop down. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.FillWin.cboWrapMode_SelectedValueChanged(System.Object,System.EventArgs)"><summary>
+ Handles changes to the texture wrap mode caused by changes in cboWrapMode 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.FillWin.cboFills_SelectedIndexChanged(System.Object,System.EventArgs)"><summary>
+ Update the current fill and displayed fill panel in response to a change in cboFills. 
+ Note that the updateFill method short circuits itself to avoid infinite loops.  In other 
+ words, we want the "user" selected values to call this, but not the programmatic changes. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="T:GDIPlusArchitect.HistoryWin"><summary>
+ Holds a panel of history information.  This panel displays the history of changes 
+ for the selected GDIDocument up to the limit specified under Options for undo steps. 
+ Additionally, it allows the user to click and select history points that they wish 
+ to navigate to. 
+ </summary>
+ <remarks>The history list is owner drawn.  This allows for item in the past to be drawn 
+ with the normal look and feel and items in the future (items past the current history 
+ position) to be drawn grayed.  For more information on owner drawn ListControls, 
+ see MSDN. 
+ </remarks></member><member name="M:GDIPlusArchitect.HistoryWin.#ctor"><summary>
+ Creates a new instance of a HistoryWin 
+ </summary></member><member name="M:GDIPlusArchitect.HistoryWin.refreshPanel"><summary>
+ Refreshes the list of history items 
+ </summary>
+ <param name="doc" /></member><member name="M:GDIPlusArchitect.HistoryWin.drawSelectedItem(System.Int32,System.Drawing.Rectangle,System.Drawing.Graphics)"><summary>
+ Draws the selected history item to the list. 
+ </summary>
+ <param name="iIndex">Index of the selected items</param>
+ <param name="rect">Bounds of the selected item</param>
+ <param name="g">Graphics context to draw against</param></member><member name="M:GDIPlusArchitect.HistoryWin.drawUnselectedItem(System.Int32,System.Drawing.Rectangle,System.Drawing.Graphics)"><summary>
+ Draws unselected history items to the list 
+ </summary>
+ <param name="iIndex">Index of the unselected items</param>
+ <param name="rect">Bounds of the unselected item</param>
+ <param name="g">Graphics context to draw against</param></member><member name="M:GDIPlusArchitect.HistoryWin.lstHistory_DrawItem(System.Object,System.Windows.Forms.DrawItemEventArgs)"><summary>
+ Owner draws the history list with its items. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.HistoryWin.HistoryWindow_EnabledChanged(System.Object,System.EventArgs)"><summary>
+ Enables and disables the underlying history list when the HistoryWin's enabled 
+ state changes. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.HistoryWin.lstHistory_SelectedValueChanged(System.Object,System.EventArgs)"><summary>
+ Responds to changes in the selected item within the history list and sets the 
+ selected history position in the current document based on the value. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="T:GDIPlusArchitect.PageManagerWin"><summary>
+ Responsible for managing the series of pages for the PrintDocument type of output. 
+ </summary></member><member name="M:GDIPlusArchitect.PageManagerWin.#ctor"><summary>
+ Creates a new instance of a PageManagerWin 
+ </summary></member><member name="M:GDIPlusArchitect.PageManagerWin.refreshPanel"><summary>
+ Handles history change events that bubble up from the current document.  This 
+ handler is invoked from the window that contains the current document. 
+ </summary>
+ <param name="doc">Document which has had its history changed</param></member><member name="M:GDIPlusArchitect.PageManagerWin.RefreshListContents"><summary>
+ Rebuilds the list of pages given a document to represent 
+ </summary>
+ <param name="doc">The document to represent</param></member><member name="M:GDIPlusArchitect.PageManagerWin.btnAddPage_Click(System.Object,System.EventArgs)"><summary>
+ Adds a new page to the current document 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.PageManagerWin.btnDelete_Click(System.Object,System.EventArgs)"><summary>
+ Confirms and then removes a page from the current document 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.PageManagerWin.lstPages_Click(System.Object,System.EventArgs)"><summary>
+ Sets the selected page when the list of pages is clicked. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.PageManagerWin.btnName_Click(System.Object,System.EventArgs)"><summary>
+ Prompts the user for a new name for a page and assigns it if a value is received. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="T:GDIPlusArchitect.PropertyWin"><summary>
+ Holds an instance of a property grid which displays the properties of the selected 
+ object(s) on the design surface. 
+ </summary>
+ <remarks>The cboItems combobox is owner drawn.  Much of the code in this module 
+ is to support this. 
+ 
+ If you have never used the property grid control, you will probably wonder a couple things. 
+ 
+ Q) Where is the code that defines the look and feel of items in the property grid? 
+ A) This code is specified in "Attributes" on the object's public properties.  With attributes 
+ you can assign a default value, a description, the default editor (for example an image file 
+ choose editor called an ImageFileChooser), and much more.  If you are curious about how a 
+ property was able to do what it does in the grid, go to the object file where it is declared 
+ and look at the attributes declared on the property 
+ 
+ Q) Where is the code that assigns the selected value to the property? 
+ A) There is none.  If you need to control this, you control it with the SET code 
+ in the property and with attributes as discussed above. 
+ 
+ Q) Fine, but what if I want to report back to a user that a complex property is bad instead of 
+ just quietly making it valid? 
+ A) Throw a format exception.  The grid itself will handle it since the grid is assigning 
+ the property. 
+ 
+ Q) What if I want to do general things every time properties change? 
+ A) Handle the propertyvaluechanged event. 
+ 
+ </remarks></member><member name="M:GDIPlusArchitect.PropertyWin.updateDropDownItems"><summary>
+ Updates the list of drop down items with the list of objects contained in the 
+ the current GDIDocument. 
+ </summary>
+ <param name="doc">The current GDIDocument </param></member><member name="M:GDIPlusArchitect.PropertyWin.refreshView"><summary>
+ Refreshes the property grid 
+ </summary>
+ <param name="doc" /></member><member name="M:GDIPlusArchitect.PropertyWin.pg_PropertyValueChanged(System.Object,System.Windows.Forms.PropertyValueChangedEventArgs)"><summary>
+ Responds to changes in properties.  Asks the current GDIDocument to record a 
+ history marker for the changed property. 
+ </summary>
+ <param name="s" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.PropertyWin.cboItems_SelectedValueChanged(System.Object,System.EventArgs)"><summary>
+ Responds to changes in the item list drop down box.  This box holds a list of the items 
+ contained in the current document. 
+ </summary>
+ <param name="sender" />
+ <param name="e" />
+ <remarks>Notice the use of _StopUpdates here.  This is used to short circuit updates to the 
+ control.  A clearer way would have been to remove listeners, but 
+ </remarks></member><member name="M:GDIPlusArchitect.PropertyWin.drawSelectedItem(System.Int32,System.Drawing.Rectangle,System.Drawing.Graphics)"><summary>
+ Draws selected items in cboItems.  cboItems is owner drawn, and this method 
+ handles rendering the selected item in the dropdown. 
+ </summary>
+ <param name="iIndex" />
+ <param name="rect" />
+ <param name="g" /></member><member name="M:GDIPlusArchitect.PropertyWin.drawUnselectedItem(System.Int32,System.Drawing.Rectangle,System.Drawing.Graphics)"><summary>
+ Draws unselected items in cboItems.  cboItems is owner drawn, and this method 
+ handles rendering the unselected items in the dropdown. 
+ </summary>
+ <param name="iIndex" />
+ <param name="rect" />
+ <param name="g" /></member><member name="M:GDIPlusArchitect.PropertyWin.cboItems_DrawItem(System.Object,System.Windows.Forms.DrawItemEventArgs)"><summary>
+ Draws a single item in the cboItems box (handles the cboItems.DrawItem event). 
+ In owner drawn controls, the control is given a DrawItem event for each item 
+ it needs to render to the surface.  This method handles drawing each item in turn. 
+ </summary>
+ <param name="sender" />
+ <param name="e" />
+ <remarks>For more information on owner drawn listcontrols, check MSDN. 
+ </remarks></member><member name="T:GDIPlusArchitect.StrokeWin"><summary>
+ A Panel for setting properties on the strokes of selected objects as well as 
+ the application wide stroke contained in the Session 
+ </summary></member><member name="M:GDIPlusArchitect.StrokeWin.populate"><summary>
+ Populates the stroke window's controls. 
+ </summary></member><member name="M:GDIPlusArchitect.StrokeWin.updatestroke(GDIStroke)"><summary>
+ Refreshes the panel to display the latest stroke properties. 
+ </summary>
+ <param name="stroke" /></member><member name="M:GDIPlusArchitect.StrokeWin.picColor_Click(System.Object,System.EventArgs)"><summary>
+ Responds to clicks on the color picture box, launching the appropriate color picker. 
+ Assigns the selected color to the stroke. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.StrokeWin.cboDash_SelectedValueChanged(System.Object,System.EventArgs)"><summary>
+ Sets the dash style of strokes 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.StrokeWin.cboAlignment_SelectedValueChanged(System.Object,System.EventArgs)"><summary>
+ Sets the alignment style of strokes 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.StrokeWin.cboLineJoin_SelectedValueChanged(System.Object,System.EventArgs)"><summary>
+ Responds to changes in the linjoin type 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.StrokeWin.cboEndCap_SelectedValueChanged(System.Object,System.EventArgs)"><summary>
+ Sets the end cap of strokes 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.StrokeWin.cboStartCap_SelectedValueChanged(System.Object,System.EventArgs)"><summary>
+ Sets the start cap of the strokes. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.StrokeWin.nudWidth_ValueChanged(System.Object,System.EventArgs)"><summary>
+ Responds to changed in the GDI+ Architect custom nud for width changes 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.StrokeWin.nudDashOffset_ValueChanged(System.Object,System.EventArgs)"><summary>
+ Responds to changes in the dash offset nud 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.StrokeWin.nudWidth_LostFocus(System.Object,System.EventArgs)"><summary>
+ Verifies a valid value is contained in the width nud if it looses focus and 
+ a valid value is not contained in the nud. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="T:GDIPlusArchitect.TextWin"><summary>
+ Provides an interface for manipulating the properties of text on the design 
+ surface as well as setting the application wide font properties 
+ </summary></member><member name="M:GDIPlusArchitect.TextWin.#ctor(System.Drawing.Font)"><summary>
+ Constructs a new instance of the Text panel given a starting font to use. 
+ </summary>
+ <param name="ft">The initial font to use</param></member><member name="M:GDIPlusArchitect.TextWin.populatefontnames"><summary>
+ Populates the list of valid fonts into cboFontName. 
+ </summary></member><member name="M:GDIPlusArchitect.TextWin.populateFontUnits"><summary>
+ Populates cboUnits with a series of NVPairs (read this as name value pair) containing 
+ the name of the unit and a Drawing.GraphicsUnit which corresponds to the name of the 
+ unit. 
+ </summary></member><member name="M:GDIPlusArchitect.TextWin.createInitialFont(System.Drawing.Font)"><summary>
+ Given a font, assigns the text window to reflect the settings of the font 
+ the font. 
+ </summary>
+ <param name="font">The font to base settings off of</param></member><member name="M:GDIPlusArchitect.TextWin.chkBold_CheckedChanged(System.Object,System.EventArgs)"><summary>
+ Responds to changes in the bold check box. 
+ </summary>
+ <param name="sender" />
+ <param name="e" />
+ <remarks>Notice that not all fonts support bold, so we have to try to create a 
+ font that does and handle cases where it does not. 
+ </remarks></member><member name="M:GDIPlusArchitect.TextWin.chkItalic_CheckedChanged(System.Object,System.EventArgs)"><summary>
+ Responds to changes in the italic check box. 
+ </summary>
+ <param name="sender" />
+ <param name="e" />
+ <remarks>Notice that not all fonts support italics, so we have to try to create a 
+ font that does and handle cases where it does not. 
+ </remarks></member><member name="M:GDIPlusArchitect.TextWin.chkUnderline_CheckedChanged(System.Object,System.EventArgs)"><summary>
+ Responds to changes in the underline check box. 
+ </summary>
+ <param name="sender" />
+ <param name="e" />
+ <remarks>Notice that not all fonts support underlining, so we have to try to create a 
+ font that does and handle cases where it does not. 
+ </remarks></member><member name="M:GDIPlusArchitect.TextWin.chkStrike_CheckedChanged(System.Object,System.EventArgs)"><summary>
+ Responds to changes in the stroke through check box. 
+ </summary>
+ <param name="sender" />
+ <param name="e" />
+ <remarks>Notice that not all fonts strike through, so we have to try to create a 
+ font that does and handle cases where it does not. 
+ </remarks></member><member name="M:GDIPlusArchitect.TextWin.cboFontname_SelectedValueChanged(System.Object,System.EventArgs)"><summary>
+ Responds to changes in the selected font drop down box. 
+ </summary>
+ <param name="sender" />
+ <param name="e" />
+ <remarks>Believe it or not, not all fonts support "Regular" type face, for example 
+ Arahoni.  The initial GDI+ Architect release shipped with a bug that assumed they did which 
+ which caused a top level exception to occur. 
+ 
+ In the code below, the font is attempted to be created.  If it fails, it degrades to the previously 
+ selected font and informs the user they will need to use the font dialogue to get at the font. 
+ </remarks></member><member name="M:GDIPlusArchitect.TextWin.cboUnits_SelectedValueChanged(System.Object,System.EventArgs)"><summary>
+ Responds to changes in the units value 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.TextWin.btnDialog_Click(System.Object,System.EventArgs)"><summary>
+ Launches the .NET  font selection dialogue box. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.TextWin.nudSize_ValueChanged(System.Object,System.EventArgs)"><summary>
+ Responds to changes in the value of the font size. The NUD control used on this window 
+ is a custom nud included in GDI+ Architect. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.TextWin.nudSize_LostFocus(System.Object,System.EventArgs)"><summary>
+ Verifies that something valid is in the NUD control if it looses focus with an 
+ empty string. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="T:GDIPlusArchitect.ToolboxWin"><summary>
+ A control to hold the tool window which is composed of a collection of ToolButtons 
+ and color pick boxes.  The tool window is used to select the current application wide 
+ tool that is used on the surface.  The actual management of tools is located 
+ in the ToolManager class. 
+ </summary></member><member name="M:GDIPlusArchitect.ToolboxWin.#ctor"><summary>
+ Creates a new instance of the Toolbox window.  Refreshes the colors in the 
+ preview boxes and updates the images displayed in the tool buttons. 
+ </summary></member><member name="M:GDIPlusArchitect.ToolboxWin.initImages"><summary>
+ Assigns images to the tool buttons in the toolbox window. 
+ </summary></member><member name="M:GDIPlusArchitect.ToolboxWin.refreshPanel"><summary>
+ Update the tool button display and current mode based upon an explicit 
+ mode setting.  There are cases when other parts of the application, most 
+ notably the current drawing surface nede to change the selected tool such 
+ as when the user presses "ESC" during an operation to abort it. 
+ </summary>
+ <param name="curMode" /></member><member name="M:GDIPlusArchitect.ToolboxWin.ToggleToolMode(GDIPlusArchitect.ToolButton)"><summary>
+ Switches tool modes based upon which button was clicked.  Updates the 
+ application wide cursor to show the current most cursor. 
+ </summary>
+ <param name="btn">The tool button clicked</param></member><member name="M:GDIPlusArchitect.ToolboxWin.Togglebuttons(GDIPlusArchitect.ToolButton)"><summary>
+ Toggles the state of all buttons based upon a selected button.  Each button is 
+ expected to mark itself as unselected if it doesn't equal the incoming button 
+ reference 
+ </summary>
+ <param name="s">The button that is selected</param>
+ <remarks>
+ This could also have been implement as: 
+     For i As Int32 = 0 To pnToolBar.Controls.Count - 1 
+          If TypeOf pnToolBar.Controls(i) Is ToolButton Then 
+             Dim btn As ToolButton = DirectCast(pnToolBar.Controls(i), ToolButton) 
+             btn.ToggleSelection(selButton) 
+          End If 
+      Next 
+ 
+ But referencing the buttons explicitly seems more performant. 
+ </remarks></member><member name="M:GDIPlusArchitect.ToolboxWin.picFillColor_Paint(System.Object,System.Windows.Forms.PaintEventArgs)"><summary>
+ Renders the current fill to the picture box that displays the current fill. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.ToolboxWin.picStrokeColor_Paint(System.Object,System.Windows.Forms.PaintEventArgs)"><summary>
+ Renders the color of the current stroke to the stroke color box. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.ToolboxWin.ToolBoxWin_VisibleChanged(System.Object,System.EventArgs)"><summary>
+ Checks which scroll buttons are necessary when visibility changes. 
+ </summary>
+ <param name="sender" />
+ <param name="e" /></member><member name="M:GDIPlusArchitect.ToolboxWin.scrollUp"><summary>
+ Scrolls the tool window up as necessary and checks the scroll buttons. 
+ </summary></member><member name="M:GDIPlusArchitect.ToolboxWin.scrollDown"><summary>
+ Scrolls the tool window down if necessary and then checks which buttons should 
+ be enabled 
+ </summary></member><member name="M:GDIPlusArchitect.ToolboxWin.OnMouseWheel(System.Windows.Forms.MouseEventArgs)"><summary>
+ Responds to wheel, scrolling the tool window view if appropriate. 
+ </summary>
+ <param name="e" /></member><member name="M:GDIPlusArchitect.ToolboxWin.CheckScrollButtons"><summary>
+ Determines which scroll buttons should be enabled after a scroll. 
+ </summary></member><member name="M:GDIPlusArchitect.ToolboxWin.promptForImage"><summary>
+ Prompts for an image source using the OpenFileDialog.  Returns the image source 
+ selected by the user or an empty string if no source was selected 
+ </summary>
+ <returns>An image source selected by the user.</returns></member><member name="T:GDIPlusArchitect.BoundingTool"><summary>
+ Responsible for providing bounding box functionality 
+ </summary></member><member name="M:GDIPlusArchitect.BoundingTool.#ctor(System.Drawing.Point)"><summary>
+ Creates a new instance of a bounding box tool 
+ </summary>
+ <param name="ptPoint">The point at which bounding began on the surface</param></member><member name="M:GDIPlusArchitect.BoundingTool.draw(System.Drawing.Graphics,System.Single)"><summary>
+ Draws the bounding tool to the graphics surface 
+ </summary>
+ <param name="g">Graphics context to draw against</param>
+ <param name="fScale">Current zoom factor of the surface</param></member><member name="M:GDIPlusArchitect.BoundingTool.EndTool(System.Boolean)"><summary>
+ Ends the bounding tool operation 
+ </summary>
+ <param name="bShiftDown">Whether shift is held down or not</param></member><member name="M:GDIPlusArchitect.BoundingTool.UpdateTool(System.Drawing.Point,System.Windows.Forms.MouseButtons,System.Boolean,System.Single)"><summary>
+ Updates the bounding tool with the latest information from the client surface 
+ </summary>
+ <param name="ptPoint">Last recorded mouse point </param>
+ <param name="btn">Which buttons are held down</param>
+ <param name="bShiftDown">Whether shift is being held down</param></member><member name="T:GDIPlusArchitect.DragHandleTool"><summary>
+ Response for handling manipulation of drag handles for the selected object 
+ </summary></member><member name="T:GDIPlusArchitect.DragHandleTool.EnumDragDirection"><summary>
+ The current direction the user is dragging in.  Used fo when shift is held to 
+ perform proportional drag handle resizing. 
+ </summary></member><member name="M:GDIPlusArchitect.DragHandleTool.New(GDIObject,EnumDragHandles,Point)"><summary>
+ Creates a new instance of the DragHandle tool given an initial object, a 
+ drag handle point, and which handle is being manipulated 
+ </summary>
+ <param name="gdiobj">The object being manipulated</param>
+ <param name="initHandle">The type of handle being manipulated</param>
+ <param name="ptOrigin">The initial point dragging began at.</param></member><member name="M:GDIPlusArchitect.DragHandleTool.setTop(Point,Boolean)"><summary>
+ Sets a top handle point appropriately. 
+ </summary>
+ <param name="pt">the last mouse point </param>
+ <param name="bshiftdown">Whether shift is being held down</param>
+ <returns>The "out" drag handle.  If the user "flips" the drag handles over the 
+ surface, the drag handle becomes its mirror opposite.</returns></member><member name="M:GDIPlusArchitect.DragHandleTool.setBottom(Point,Boolean)"><summary>
+ Sets a bottom handle point appropriately 
+ </summary>
+ <param name="pt">the last mouse point </param>
+ <param name="bshiftdown">Whether shift is being held down</param>
+ <returns>The "out" drag handle.  If the user "flips" the drag handles over the 
+ surface, the drag handle becomes its mirror opposite.</returns></member><member name="M:GDIPlusArchitect.DragHandleTool.setLeft(Point,Boolean)"><summary>
+ Sets a left drag handle appropriately 
+ </summary>
+ <param name="pt">the last mouse point </param>
+ <param name="bshiftdown">Whether shift is being held down</param>
+ <returns>The "out" drag handle.  If the user "flips" the drag handles over the 
+ surface, the drag handle becomes its mirror opposite.</returns></member><member name="M:GDIPlusArchitect.DragHandleTool.setRight(Point,Boolean)"><summary>
+ Sets a right drag handle appropriately 
+ </summary>
+ <param name="pt">the last mouse point </param>
+ <param name="bshiftdown">Whether shift is being held down</param>
+ <returns>The "out" drag handle.  If the user "flips" the drag handles over the 
+ surface, the drag handle becomes its mirror opposite.</returns></member><member name="M:GDIPlusArchitect.DragHandleTool.setBottomRight(Point,Boolean)"><summary>
+ Handles a drag handle operation on a bottom right corner drag handle 
+ </summary>
+ <param name="pt">the last mouse point </param>
+ <param name="bshiftdown">Whether shift is being held down</param>
+ <returns>The "out" drag handle.  If the user "flips" the drag handles over the 
+ surface, the drag handle becomes its mirror opposite.</returns></member><member name="M:GDIPlusArchitect.DragHandleTool.setTopLeft(Point,Boolean)"><summary>
+ Handles a drag operation on a top left corner drag handle 
+ </summary>
+ <param name="pt">the last mouse point </param>
+ <param name="bshiftdown">Whether shift is being held down</param>
+ <returns>The "out" drag handle.  If the user "flips" the drag handles over the 
+ surface, the drag handle becomes its mirror opposite.</returns></member><member name="M:GDIPlusArchitect.DragHandleTool.setTopRight(Point,Boolean)"><summary>
+ Handles a drag handle on a top right corner handle 
+ </summary>
+ <param name="pt">the last mouse point </param>
+ <param name="bshiftdown">Whether shift is being held down</param>
+ <returns>The "out" drag handle.  If the user "flips" the drag handles over the 
+ surface, the drag handle becomes its mirror opposite.</returns></member><member name="M:GDIPlusArchitect.DragHandleTool.setBottomLeft(Point,Boolean)"><summary>
+ Handles a drag operation on a bottom left corner drag handle 
+ </summary>
+ <param name="pt">the last mouse point </param>
+ <param name="bshiftdown">Whether shift is being held down</param>
+ <returns>The "out" drag handle.  If the user "flips" the drag handles over the 
+ surface, the drag handle becomes its mirror opposite.</returns></member><member name="M:GDIPlusArchitect.DragHandleTool.draw(System.Drawing.Graphics,Single)"><summary>
+ Draws the drag handle tool to the surface 
+ </summary>
+ <param name="g">Graphics context to draw against</param>
+ <param name="fScale">Zoom factor of the current surface.</param></member><member name="M:GDIPlusArchitect.DragHandleTool.EndTool(Boolean)"><summary>
+ Ends the draghandle tool operation 
+ </summary>
+ <param name="bShiftDown">Whether shift is being held down or not</param></member><member name="M:GDIPlusArchitect.DragHandleTool.UpdateTool(System.Drawing.Point,MouseButtons,Boolean,Single)"><summary>
+ Updates the drag handle tool based upon the last mouse point 
+ </summary>
+ <param name="ptPoint">Point, snapped appropriately</param>
+ <param name="btn">Button held down</param>
+ <param name="bShiftDown">Whether shift is down or not</param></member><member name="M:GDIPlusArchitect.DragHandleTool.MapPoint(Point)"><summary>
+ Maps the mouse position from rotated coordinate space to normal space. 
+ </summary>
+ <param name="pt">Point to map from rotated coordinated space to normal space</param>
+ <returns>The point in normal coordinate space.</returns></member><member name="M:GDIPlusArchitect.DragHandleTool.getdirection(Point)"><summary>
+ Gets the current proportional drag direction based upon the last recorded point. 
+ Used for when dragging handles with shift held. 
+ </summary>
+ <param name="ptsnapped">Point snapped appropriately</param></member><member name="M:GDIPlusArchitect.DragHandleTool.translateRotatedDragRect(Rectangle)"><summary>
+ Translates a drag rectangle into standard coordinates.  Used to assign 
+ the graphical bounds to the actual, unrotated object bounds. 
+ </summary>
+ <param name="rect">Rectangle to translate </param>
+ <returns /></member><member name="M:GDIPlusArchitect.DragHandleTool.handlePointSet(Point,Boolean)"><summary>
+ Handles drag handles for when the drag handle type of point is "Point" or "Curve" 
+ In these cases, its not really a drag handle, but a point move operation. 
+ </summary>
+ <param name="ptPoint">Point to update the point to</param>
+ <param name="bShiftDown">Whether shift is being held down or not.</param></member><member name="T:GDIPlusArchitect.DragTool"><summary>
+ Responsible for drag operations, where an object or objects are dragged to 
+ another position on the canvas. 
+ </summary></member><member name="M:GDIPlusArchitect.DragTool.#ctor(System.Drawing.Point)"><summary>
+ Creates a new DragTool based on an origin pointof the drag operation 
+ </summary>
+ <param name="ptSnapped" /></member><member name="M:GDIPlusArchitect.DragTool.draw(System.Drawing.Graphics,System.Single)"><summary>
+ Renders the dragtool to a surface 
+ </summary>
+ <param name="g">Graphics context to draw against</param>
+ <param name="fScale">Current Zoom factor of the surface</param></member><member name="M:GDIPlusArchitect.DragTool.EndTool(System.Boolean)"><summary>
+ Ends a drag tool operation 
+ </summary>
+ <param name="bShiftDown">Whether shift is held down or not</param></member><member name="M:GDIPlusArchitect.DragTool.UpdateTool(System.Drawing.Point,System.Windows.Forms.MouseButtons,System.Boolean,System.Single)"><summary>
+ Updates the drag tool based upon the latest mouse point 
+ </summary>
+ <param name="ptPoint">Mouse point, snapped appropriately</param>
+ <param name="btn">Which button is being held down</param>
+ <param name="bShiftDown">Whether shift is held down or not</param></member><member name="T:GDIPlusArchitect.ShapeTool"><summary>
+ Providers a wraper for drawing shapes into the surface (ellipses and circles) 
+ </summary></member><member name="M:GDIPlusArchitect.ShapeTool.#ctor(System.Drawing.Point)"><summary>
+ Constructs a new instance of the ShapeTool given an initial point where 
+ drawing should bei 
+ </summary>
+ <param name="pt" /></member><member name="M:GDIPlusArchitect.ShapeTool.UpdateTool(System.Drawing.Point,System.Windows.Forms.MouseButtons,System.Boolean,System.Single)"><summary>
+ Updates the ShapeTool based upon the latest information from the client 
+ surface 
+ </summary>
+ <param name="ptPoint">The latest mouse point recorded on the surface</param>
+ <param name="btn">Which mouse button is being held down</param>
+ <param name="bShiftDown">Whether the shift key is held down or not</param></member><member name="M:GDIPlusArchitect.ShapeTool.draw(System.Drawing.Graphics,System.Single)"><summary>
+ Renders the ShapeTool to the client surface 
+ </summary>
+ <param name="g">Graphics context to draw against</param>
+ <param name="fScale">Current zoom factor on the surfaceparam&gt;<member name="M:GDIPlusArchitect.ShapeTool.EndTool(System.Boolean)"><summary>
+ Ends a ShapeTool operation 
+ </summary>
+ <param name="bShiftDown">Whether shift is being held down or not</param></member><member name="M:GDIPlusArchitect.ShapeTool.createRectangle"><summary>
+ Creates a new instance of a GDIRectangle 
+ </summary></member><member name="M:GDIPlusArchitect.ShapeTool.CreateCircle"><summary>
+ Creates a new instance of a GDIEllipse 
+ </summary></member><member name="T:GDIPlusArchitect.FieldTool"><summary>
+ Wraps the functionality needed to created GDI+ fields. 
+ </summary></member><member name="M:GDIPlusArchitect.FieldTool.createField"><summary>
+ Creates a new GDI_ Field based upon the FieldTool's state.  All GDIFields are 
+ initially created as no wrap fields. 
+ </summary></member><member name="M:GDIPlusArchitect.FieldTool.draw(System.Drawing.Graphics,System.Single)"><summary>
+ Renders the field tool to a drawing surface 
+ </summary>
+ <param name="g">Graphics context to draw against </param>
+ <param name="fscale">The current zoom factor of the surface</param></member><member name="M:GDIPlusArchitect.FieldTool.EndTool(System.Boolean)"><summary>
+ Ends the FieldTool operation 
+ </summary>
+ <param name="bShiftDown">Whether shift is being held down or not</param></member><member name="M:GDIPlusArchitect.FieldTool.UpdateTool(System.Drawing.Point,System.Windows.Forms.MouseButtons,System.Boolean,System.Single)"><summary>
+ Updates a field tool with the latest state information from the surface 
+ </summary>
+ <param name="ptPoint">Last mouse point recorded on the surface</param>
+ <param name="btn">Whether the mouse button is down or not</param>
+ <param name="bShiftDown">Whether shift is being held down or not</param></member><member name="T:GDIPlusArchitect.GDITool"><summary>
+ Base class for all of the "tools" that can be used on the surface.  Tools are 
+ things such as the pen tool and line tool but also includes less obvious 
+ tools such as the "drag handle tool". 
+ </summary></member><member name="M:GDIPlusArchitect.GDITool.#ctor(System.Drawing.Point)"><summary>
+ Constructs a new instance of a tool 
+ </summary>
+ <param name="ptOrigin">The initial point, snapped as appropriate, where the tool was 
+ invoked.</param></member><member name="M:GDIPlusArchitect.GDITool.EndTool(System.Boolean)"><summary>
+ Required for inheritors to implement.  Ends the operation of the current tool. 
+ </summary></member><member name="M:GDIPlusArchitect.GDITool.draw(System.Drawing.Graphics,System.Single)"><summary>
+ Required for implementors to implement.  Renders the tool to the surface 
+ </summary>
+ <param name="g">Graphics context to draw to</param>
+ <param name="fScale">Current zoom factor of the surface</param></member><member name="M:GDIPlusArchitect.GDITool.UpdateTool(System.Drawing.Point,System.Windows.Forms.MouseButtons,System.Boolean,System.Single)"><summary>
+ Required for implementors to implement.  Given a point and a mouse button, 
+ tools should update themselves as needed. 
+ </summary>
+ <param name="ptPoint">The last point, snapped appropriately if needed.</param>
+ <param name="ebutton">The mouse button being reacted to.</param></member><member name="M:GDIPlusArchitect.GDITool.getDrawingRect(System.Drawing.Point,System.Boolean)"><summary>
+ Sets the bounding rectangle appropriately depending on if shift is 
+ being held. 
+ </summary>
+ <param name="ptsnapped">Last mouse point, snapped appropriately</param>
+ <param name="bShiftDown">Whether shift is being held down or not</param></member><member name="M:GDIPlusArchitect.GDITool.getEndPoint(System.Drawing.Point,System.Boolean)"><summary>
+ Sets the end point of the line based on whether shift is being held down. 
+ </summary>
+ <param name="ptsnapped">The end point of the line, snapped appropriately</param>
+ <param name="bShiftDown">Whether shift is being held or not</param></member><member name="M:GDIPlusArchitect.GDITool.Dispose(System.Boolean)"><summary>
+ Disposes of a GDIStroke, specifically disposing of the pen. 
+ </summary>
+ <param name="disposing">Whether unmanaged resources are being disposed or not.</param></member><member name="M:GDIPlusArchitect.GDITool.Dispose"><summary>
+ Calls the custom dispose method 
+ </summary></member><member name="M:GDIPlusArchitect.LineTool.#ctor(System.Drawing.Point)"><summary>
+ Creates a new instance of the LineTool given a starting point 
+ </summary>
+ <param name="pt">The point at which to begin drawing the line</param></member><member name="M:GDIPlusArchitect.LineTool.createLine"><summary>
+ Creates a GDILine from the current state of the LineTool 
+ </summary></member><member name="M:GDIPlusArchitect.LineTool.Draw(System.Drawing.Graphics,System.Single)"><summary>
+ Renders the line tool to the surface 
+ </summary>
+ <param name="g">Graphics context to draw against</param>
+ <param name="fScale">The current zoom factor of the surface</param></member><member name="M:GDIPlusArchitect.LineTool.EndTool(System.Boolean)"><summary>
+ Ends the line tool, creating a new line if start and end points are different 
+ </summary>
+ <param name="bShiftDown" /></member><member name="M:GDIPlusArchitect.LineTool.UpdateTool(System.Drawing.Point,System.Windows.Forms.MouseButtons,System.Boolean,System.Single)"><summary>
+ Updates the LineTool based on the latest mouse point 
+ </summary>
+ <param name="ptPoint">Last recorded mouse point</param>
+ <param name="btn">Which buttons are being held.</param>
+ <param name="bShiftDown">Whether shift is down or not</param></member><member name="T:GDIPlusArchitect.PenTool"><summary>
+ Wraps pen tool related functionality 
+ </summary></member><member name="M:GDIPlusArchitect.PenTool.AddPenPoint"><summary>
+ Adds a pen point to the path being created.  Returns whether the path has 
+ been closed or not. 
+ </summary>
+ <returns>A boolean indicating if the previously open path has been closed 
+ by the user.</returns>
+ <remarks>As the user brings the mouse into the area of the initial point, 
+ if they add a pen point the previously open path closes.  This method returns 
+ a value indicating this has occurred. 
+ </remarks></member><member name="M:GDIPlusArchitect.PenTool.UpdateCurve(System.Drawing.Point)"><summary>
+ Continues a curvature segment with the last recorded point 
+ </summary>
+ <param name="ptSnapped">Point to add to the curved segment.</param></member><member name="M:GDIPlusArchitect.PenTool.beginCurve(System.Drawing.Point)"><summary>
+ Begins a curvature segment 
+ </summary>
+ <param name="ptSnapped">Point to begin curving at, snapped appropriately</param></member><member name="M:GDIPlusArchitect.PenTool.canclose(System.Drawing.Point,System.Single)"><summary>
+ Returns a boolean indicating if the pen tool is within "closeable range" 
+ As the user moves the mouse toward the initial pen point, a circle is drawn 
+ indicating the path is closable.  This method determines if the pen tool 
+ is within range. 
+ </summary>
+ <param name="ptSnapped">A point snapped to grid appropriately</param>
+ <returns /></member><member name="M:GDIPlusArchitect.PenTool.EndTool(System.Boolean)"><summary>
+ Ends the pen tool operation 
+ </summary>
+ <param name="bShiftDown">Whether shift is being held down or not</param></member><member name="M:GDIPlusArchitect.PenTool.UpdateTool(System.Drawing.Point,System.Windows.Forms.MouseButtons,System.Boolean,System.Single)"><summary>
+ Updates the pen tool based upon the last known mouse point and what buttons are 
+ being held down. 
+ </summary>
+ <param name="ptPoint">The last recorded mouse point</param>
+ <param name="btn">Which mouse button, if any, is being held down</param>
+ <param name="bShiftDown">Whether shift is held down or not</param>
+ <remarks>Whereas most tools the mouse is held down through 
+ the operation, when users use a pen tool, they expect to add point to point 
+ What this is saying is if a point is added and dragged with the most down, 
+ the user intends to create a curvature point. 
+ </remarks></member><member name="M:GDIPlusArchitect.PenTool.draw(System.Drawing.Graphics,System.Single)"><summary>
+ Renders the pen tool to the current surface 
+ </summary>
+ <param name="g">Graphics context to draw against </param>
+ <param name="fScale">Current zoom factor of the surface</param></member><member name="M:GDIPlusArchitect.PlaceTool.#ctor(System.Drawing.Point)"><summary>
+ Creates a new instance of the PlaceTool given an origin to begin creating the 
+ place rectangle at. 
+ </summary>
+ <param name="pt">the point to begin placing at.</param></member><member name="P:GDIPlusArchitect.PlaceTool.ImageSource"><summary>
+ Loads an image from a path 
+ </summary>
+ <param name="src">Source to load the image from.</param></member><member name="M:GDIPlusArchitect.PlaceTool.UpdateTool(System.Drawing.Point,System.Windows.Forms.MouseButtons,System.Boolean,System.Single)"><summary>
+ Updates the PlaceTool 
+ </summary>
+ <param name="ptPoint">Last mouse point, snapped appropriately</param>
+ <param name="btn">Mouse button being held</param>
+ <param name="bShiftDown">Whether the shift key is down or not.</param></member><member name="M:GDIPlusArchitect.PlaceTool.draw(System.Drawing.Graphics,System.Single)"><summary>
+ Renders the PlaceTool to the current surface 
+ </summary>
+ <param name="g">Graphics context to draw against</param>
+ <param name="fScale">Zoom factor of the surface</param></member><member name="M:GDIPlusArchitect.PlaceTool.EndTool(System.Boolean)"><summary>
+ Ends the PlaceTool operation. 
+ </summary>
+ <param name="bShiftDown">Whether shift is held or not</param></member><member name="M:GDIPlusArchitect.PlaceTool.placeImage"><summary>
+ Places an image with its original scale (no bounding rect) 
+ </summary></member><member name="M:GDIPlusArchitect.PlaceTool.placeImage(System.Drawing.Rectangle)"><summary>
+ Places an image within a specific rectangular bounds 
+ </summary>
+ <param name="rect" /></member><member name="T:GDIPlusArchitect.TextDragBox"><summary>
+ Tool for creating rectangular fixed width text areas. 
+ </summary></member><member name="M:GDIPlusArchitect.TextDragBox.#ctor(System.Drawing.Point)"><summary>
+ Creates a new instance of a TextDragbox, beginning at the point specified in 
+ ptObject 
+ </summary>
+ <param name="ptObject">The point to begin creating text at.</param></member><member name="P:GDIPlusArchitect.TextDragBox.Bounds"><summary>
+ Gets the current bounds of the TextDragBox tool. 
+ </summary>
+ <value>A rectangle containing the current bounds of the tool</value></member><member name="M:GDIPlusArchitect.TextDragBox.UpdateTool(System.Drawing.Point,System.Windows.Forms.MouseButtons,System.Boolean,System.Single)"><summary>
+ Updates the TextDragBox tool based upon the last mouse point and the buttons 
+ being held 
+ </summary>
+ <param name="ptPoint" />
+ <param name="btn" /></member><member name="M:GDIPlusArchitect.TextDragBox.draw(System.Drawing.Graphics,System.Single)"><summary>
+ Renders the TextDrag tool to the current graphics surface. 
+ </summary>
+ <param name="g">Graphics context to draw against</param>
+ <param name="fScale">Current zoom factor of the surface</param></member><member name="M:GDIPlusArchitect.TextDragBox.EndTool(System.Boolean)"><summary>
+ Ends the TextDragTool operation 
+ </summary>
+ <param name="bShiftDown">Whether shift is being held down or not</param></member><member name="T:GDIPlusArchitect.TextTool"><summary>
+ Tool used to manipulate text on the drawing surface by typing into the text. 
+ </summary>
+ <remarks>This tool is solely used to allow user to type onto the text objcets 
+ on the surface.  The TextDragBox tool is used to position text within fixed 
+ bounded boxes 
+ </remarks></member><member name="M:GDIPlusArchitect.TextTool.#ctor(Rectangle)"><summary>
+ Creates a new text tool instance for the case when the user has dragged a 
+ rectangle.  In this case, the layout is fixed. 
+ </summary>
+ <param name="rect">The fixed layout rect</param></member><member name="M:GDIPlusArchitect.TextTool.#ctor(Point)"><summary>
+ Creates a new text tool for when the user has clicked with the text tool. 
+ In this case the text object created has a variable length layout. 
+ </summary>
+ <param name="pt" /></member><member name="M:GDIPlusArchitect.TextTool.#ctor(Point,Int32,GDIText)"><summary>
+ Creates a new text tool for when the user is editing an existing object. 
+ </summary>
+ <param name="pt">Origin point of the text</param>
+ <param name="miCharIndex">The char index "hit" by the tool when text editing began.</param>
+ <param name="editingObject">The GDIText object being edited by the tool</param></member><member name="M:GDIPlusArchitect.TextTool.PointIsInBox(System.Drawing.PointF,System.Single)"><summary>
+ Returns a boolean indicating whether a point is within the bounds of 
+ the text box. 
+ </summary>
+ <param name="pt">The point to check.</param>
+ <returns>A boolean indicating if the text was within the box.</returns></member><member name="M:GDIPlusArchitect.TextTool.hittestCharPoint(System.Drawing.PointF)"><summary>
+ Attempts to set the cursor appropriately based upon a click point within the 
+ text box. 
+ </summary>
+ <param name="pt" /></member><member name="M:GDIPlusArchitect.TextTool.AttemptSelection(System.Drawing.PointF)"><summary>
+ Tries to select the text at a point.  This is used when the user clicks on a 
+ character while in text edit mode. 
+ </summary>
+ <param name="pt">The point at which the mouse fell translated into the object's 
+ coordinates.</param></member><member name="M:GDIPlusArchitect.TextTool.DoPaste(System.String)"><summary>
+ Performs a local paste into the text box 
+ </summary>
+ <param name="sText">The text to psate.</param></member><member name="M:GDIPlusArchitect.TextTool.DoUndo"><summary>
+ Undoes a local text operation. 
+ </summary></member><member name="M:GDIPlusArchitect.TextTool.DoRedo"><summary>
+ Redoes as local text operation 
+ </summary></member><member name="M:GDIPlusArchitect.TextTool.DoCopy"><summary>
+ Performs a local copy on the text object 
+ </summary></member><member name="M:GDIPlusArchitect.TextTool.DoCut"><summary>
+ Performs a local cut on the text object 
+ </summary></member><member name="M:GDIPlusArchitect.TextTool.checkIndexes(System.String)"><summary>
+ Verifies that a valid text position is still selected after an undo or a redo 
+ </summary>
+ <param name="stext" /></member><member name="M:GDIPlusArchitect.TextTool.UpdateTool(System.Drawing.Point,System.Windows.Forms.MouseButtons,System.Boolean,System.Single)"><summary>
+ Not used with the text tool. 
+ </summary>
+ <param name="ptPoint" />
+ <param name="btn" /></member><member name="M:GDIPlusArchitect.TextTool.EndTool(System.Boolean)"><summary>
+ Ends a text tool operation and updates an existing GDIText object or creates a 
+ new object as appropriate. 
+ </summary></member><member name="M:GDIPlusArchitect.TextTool.draw(System.Drawing.Graphics,System.Single)"><summary>
+ Renders the text tool to the current surface. 
+ </summary>
+ <param name="g">A graphics context to draw the text tool to.</param>
+ <param name="fScale">Current zoom factor of the drawing surface</param></member><member name="M:GDIPlusArchitect.TextTool.handleKeyPress(System.Windows.Forms.KeyPressEventArgs)"><summary>
+ Allows the text tool to handle a key press event, updating the contents of the 
+ text box with the new character 
+ </summary>
+ <param name="e">The key pressed</param></member><member name="M:GDIPlusArchitect.TextTool.handleKeyDown(System.Windows.Forms.KeyEventArgs)"><summary>
+ Handles a key down event inside the text box. 
+ </summary>
+ <param name="e">A KeyEventArgs matching the keypressed.</param></member><member name="M:GDIPlusArchitect.TextTool.handleNewLine"><summary>
+ Handles a new line key press inside a text box. 
+ </summary></member><member name="M:GDIPlusArchitect.TextTool.handleBackSpace"><summary>
+ Handles a backspace operation inside the text box 
+ </summary></member><member name="M:GDIPlusArchitect.TextTool.handleDelete"><summary>
+ Handles a delete operation inside the text box 
+ </summary></member><member name="M:GDIPlusArchitect.TextTool.handleRight"><summary>
+ Handles a right arrow key  press inside the text box 
+ </summary></member><member name="M:GDIPlusArchitect.TextTool.handleLeft"><summary>
+ Handles a left arrow key  press inside the text  box 
+ </summary></member><member name="M:GDIPlusArchitect.TextTool.handleDown"><summary>
+ Handles a down arrow key press inside the text box 
+ </summary></member><member name="M:GDIPlusArchitect.TextTool.handleUp"><summary>
+ Handles an up arrow key inside the text box 
+ </summary></member><member name="M:GDIPlusArchitect.TextTool.deleteSelection"><summary>
+ Deletes the currently highlighted (selected) text inside the text box. 
+ </summary></member><member name="M:GDIPlusArchitect.TextTool.copyselection"><summary>
+ Performs a copy on the currently selected text in the text box. 
+ </summary></member><member name="M:GDIPlusArchitect.TextTool.cutselection"><summary>
+ Performs a cut on the currently selected text in the text box. 
+ </summary></member></param></member></member>
+  </members>
+</doc>

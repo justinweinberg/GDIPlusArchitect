@@ -1,0 +1,863 @@
+<VisualStudioProject>
+    <VisualBasic
+        ProjectType = "Local"
+        ProductVersion = "7.10.3077"
+        SchemaVersion = "2.0"
+        ProjectGuid = "{DAE181BA-1609-4ACE-8F8D-8AE85FF0F954}"
+    >
+        <Build>
+            <Settings
+                ApplicationIcon = "4545.ico"
+                AssemblyKeyContainerName = ""
+                AssemblyName = "GDIPlusArchitect"
+                AssemblyOriginatorKeyFile = ""
+                AssemblyOriginatorKeyMode = "None"
+                DefaultClientScript = "JScript"
+                DefaultHTMLPageLayout = "Grid"
+                DefaultTargetSchema = "IE50"
+                DelaySign = "false"
+                OutputType = "WinExe"
+                OptionCompare = "Binary"
+                OptionExplicit = "On"
+                OptionStrict = "On"
+                RootNamespace = "GDIPlusArchitect"
+                StartupObject = ""
+            >
+                <Config
+                    Name = "Debug"
+                    BaseAddress = "285212672"
+                    ConfigurationOverrideFile = ""
+                    DefineConstants = ""
+                    DefineDebug = "true"
+                    DefineTrace = "true"
+                    DebugSymbols = "true"
+                    IncrementalBuild = "true"
+                    Optimize = "false"
+                    OutputPath = "bin\"
+                    RegisterForComInterop = "false"
+                    RemoveIntegerChecks = "false"
+                    TreatWarningsAsErrors = "false"
+                    WarningLevel = "1"
+                />
+                <Config
+                    Name = "Release"
+                    BaseAddress = "285212672"
+                    ConfigurationOverrideFile = ""
+                    DefineConstants = ""
+                    DefineDebug = "false"
+                    DefineTrace = "true"
+                    DebugSymbols = "false"
+                    IncrementalBuild = "false"
+                    Optimize = "true"
+                    OutputPath = "bin\"
+                    RegisterForComInterop = "false"
+                    RemoveIntegerChecks = "false"
+                    TreatWarningsAsErrors = "false"
+                    WarningLevel = "1"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.Data"
+                    AssemblyName = "System.Data"
+                />
+                <Reference
+                    Name = "System.Drawing"
+                    AssemblyName = "System.Drawing"
+                />
+                <Reference
+                    Name = "System.Windows.Forms"
+                    AssemblyName = "System.Windows.Forms"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "System.Design"
+                    AssemblyName = "System.Design"
+                    HintPath = "..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Design.dll"
+                />
+                <Reference
+                    Name = "MagicLibrary"
+                    AssemblyName = "MagicLibrary"
+                    HintPath = "Reference\MagicLibrary.dll"
+                />
+                <Reference
+                    Name = "GDIObjects"
+                    Project = "{236106C5-9C0B-4938-8728-055A10D489FF}"
+                    Package = "{F184B08F-C81C-45F6-A57F-5ABD9991F28F}"
+                />
+            </References>
+            <Imports>
+                <Import Namespace = "Microsoft.VisualBasic" />
+                <Import Namespace = "System" />
+                <Import Namespace = "System.Collections" />
+                <Import Namespace = "System.Data" />
+                <Import Namespace = "System.Drawing" />
+                <Import Namespace = "System.Diagnostics" />
+                <Import Namespace = "System.Windows.Forms" />
+            </Imports>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "4545.ico"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "App.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "AssemblyInfo.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Constants.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "GDIDoc.vb"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "GDIDoc.resx"
+                    DependentUpon = "GDIDoc.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "GDISurface.vb"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "MDIMain.vb"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "MDIMain.resx"
+                    DependentUpon = "MDIMain.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Controls\MRGNud.vb"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Controls\MRGNud.resx"
+                    DependentUpon = "MRGNud.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Controls\RollButton.vb"
+                    SubType = "Component"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Controls\RollButton.resx"
+                    DependentUpon = "RollButton.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Controls\ScrollButton.vb"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Controls\ScrollButton.resx"
+                    DependentUpon = "ScrollButton.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Controls\ToolButton.vb"
+                    SubType = "Component"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Controls\ToolButton.resx"
+                    DependentUpon = "ToolButton.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Dialogues\dgDocProperties.vb"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Dialogues\dgDocProperties.resx"
+                    DependentUpon = "dgDocProperties.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Dialogues\dgExportImage.vb"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Dialogues\dgExportImage.resx"
+                    DependentUpon = "dgExportImage.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Dialogues\dgFillPicker.vb"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Dialogues\dgFillPicker.resx"
+                    DependentUpon = "dgFillPicker.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Dialogues\dgNewGraphicClass.vb"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Dialogues\dgNewGraphicClass.resx"
+                    DependentUpon = "dgNewGraphicClass.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Dialogues\dgOptions.vb"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Dialogues\dgOptions.resx"
+                    DependentUpon = "dgOptions.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Dialogues\dgQuickCode.vb"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Dialogues\dgQuickCode.resx"
+                    DependentUpon = "dgQuickCode.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Dialogues\dgStrokePicker.vb"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Dialogues\dgStrokePicker.resx"
+                    DependentUpon = "dgStrokePicker.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Dialogues\dgTransform.vb"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Dialogues\dgTransform.resx"
+                    DependentUpon = "dgTransform.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Dialogues\ColorPicker\ColorChangedEventArgs.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Dialogues\ColorPicker\ColorHandler.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Dialogues\ColorPicker\ColorWheel.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Dialogues\ColorPicker\dgColorPicker.vb"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Dialogues\ColorPicker\dgColorPicker.resx"
+                    DependentUpon = "dgColorPicker.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\logo.png"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Icons\cursors\Bucket.cur"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\cursors\Dropper.cur"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\cursors\Hand.cur"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\cursors\Magnify.cur"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\icon\app16.ico"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\icon\helpcontents.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\icon\helpindex.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\icon\helpsearch.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\icon\historywin.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\icon\infowin.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\icon\pagewin.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\icon\propwin.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\icon\toolbox.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\alignBottom.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\alignCenter.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\alignLeft.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\AlignMain.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\alignMiddle.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\alignRight.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\alignTop.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\back.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\bringForward.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\bringToFront.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\copy.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\cut.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\delete.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\folderopen.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\folderoptions.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\folders.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\horizSpaceEqual.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\moveto.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\newclass.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\newprintdoc.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\open.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\paste.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\print.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\printpreview.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\properties.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\redo.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\refresh.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\sameSizeBoth.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\sameSizeHeight.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\sameSizeWidth.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\save.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\saveall.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\saved.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\sendBackward.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\sendToBack.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\undo.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\vertSpaceEqual.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\views.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\menu\zoom.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\tools\alpha.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\tools\bucket.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\tools\circle.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\tools\drop.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\tools\field.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\tools\hand.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\tools\import.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\tools\line.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\tools\magnify.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\tools\path.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\tools\pen.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\tools\pointer.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\tools\rect.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\tools\ScrollDown.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Icons\tools\ScrollUp.bmp"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "ImageExport\Exp.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ImageExport\ExpBMP.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ImageExport\ExpJpeg.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ImageExport\ExpMeta.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ImageExport\ExpMillions.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ImageExport\ExportFormats.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ImageExport\ExpPNG.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ImageExport\ExpTIFF.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Managers\AlignManager.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Managers\GraphicsManager.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Managers\HelpManager.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Managers\IconManager.vb"
+                    SubType = "Component"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Managers\IconManager.resx"
+                    DependentUpon = "IconManager.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Managers\OptionsManager.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Managers\PanelManager.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Managers\ToolManager.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Managers\ToolTipManager.vb"
+                    SubType = "Component"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Managers\ToolTipManager.resx"
+                    DependentUpon = "ToolTipManager.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Managers\Tooltips.xml"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Menus\GDIMenu.vb"
+                    SubType = "Component"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Menus\GDIMenu.resx"
+                    DependentUpon = "GDIMenu.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Menus\SurfaceContextMenu.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Misc\frmAbout.vb"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Misc\frmAbout.resx"
+                    DependentUpon = "frmAbout.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Misc\NVPair.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Misc\OpenFolderDialog.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Misc\Splash.vb"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Misc\Splash.resx"
+                    DependentUpon = "Splash.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Misc\Utility.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Panels\ArrangeWin.vb"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Panels\ArrangeWin.resx"
+                    DependentUpon = "ArrangeWin.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Panels\CodeWin.vb"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Panels\CodeWin.resx"
+                    DependentUpon = "CodeWin.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Panels\FillWin.vb"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Panels\FillWin.resx"
+                    DependentUpon = "FillWin.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Panels\HistoryWin.vb"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Panels\HistoryWin.resx"
+                    DependentUpon = "HistoryWin.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Panels\PageManagerWin.vb"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Panels\PageManagerWin.resx"
+                    DependentUpon = "PageManagerWin.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Panels\PropertyWin.vb"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Panels\PropertyWin.resx"
+                    DependentUpon = "PropertyWin.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Panels\StrokeWin.vb"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Panels\StrokeWin.resx"
+                    DependentUpon = "StrokeWin.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Panels\TextWin.vb"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Panels\TextWin.resx"
+                    DependentUpon = "TextWin.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Panels\ToolboxWin.vb"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Panels\ToolboxWin.resx"
+                    DependentUpon = "ToolboxWin.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <Folder RelPath = "Reference\" />
+                <File
+                    RelPath = "Tools\BoundingTool.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Tools\DragHandleTool.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Tools\DragTool.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Tools\DrawingTool.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Tools\FieldTool.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Tools\GDITool.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Tools\LineTool.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Tools\PenTool.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Tools\PlaceTool.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Tools\TextDragBox.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Tools\TextTool.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+            </Include>
+        </Files>
+    </VisualBasic>
+</VisualStudioProject>
+
